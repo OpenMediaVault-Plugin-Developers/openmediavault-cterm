@@ -37,8 +37,7 @@ data:
         hint: _("Port to listen on.")
       - type: hidden
         name: ssl
-        value: false
-        submitValue: false
+        value: ""
     buttons:
       - text: _("Open UI")
         enabledConstraint:
