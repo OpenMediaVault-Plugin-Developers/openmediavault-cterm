@@ -1,0 +1,7 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.cterm"
+  text: _("CTerm")
+  icon: "mdi:console"
+  url: "/services/cterm"

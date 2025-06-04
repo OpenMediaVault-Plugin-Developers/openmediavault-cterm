@@ -1,0 +1,17 @@
+{%- set ssl_cert_dir = salt['pillar.get']('default:OMV_SSL_CERTIFICATE_DIR', '/etc/ssl') -%}
+{%- set ssl_cert_prefix = salt['pillar.get']('default:OMV_SSL_CERTIFICATE_PREFIX', 'openmediavault') -%}
+[Unit]
+Description=container exec terminal for openmediavault-cterm
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/omv_cterm
+ExecStart=/usr/bin/python3 /opt/omv_cterm/omv_cterm.py
+Environment="FLASK_APP=/opt/omv_cterm/omv_cterm.py"
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

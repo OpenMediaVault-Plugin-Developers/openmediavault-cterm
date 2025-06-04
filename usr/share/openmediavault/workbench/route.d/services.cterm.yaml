@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/cterm"
+  title: _("CTerm")
+  editing: true
+  notificationTitle: _("Updated cterm settings.")
+  component: omv-services-cterm-form-page

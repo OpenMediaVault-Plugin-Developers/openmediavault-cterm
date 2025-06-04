@@ -1,0 +1,19 @@
+Source: openmediavault-cterm
+Section: net
+XB-Plugin-Section: utilities
+Priority: optional
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 13 )
+Standards-Version: 4.3.0
+Homepage: http://omv-extras.org/
+
+Package: openmediavault-cterm
+Architecture: all
+Depends: openmediavault (>= 7.7.6),
+         python3-flask,
+         python3-flask-socketio,
+         python3-pam,
+         ${misc:Depends}
+Recommends: python3-simple-websocket
+Description: openmediavault container exec terminal plugin
+ This plugin adds a container execute terminal.

@@ -1,0 +1,27 @@
+{
+  "type": "config",
+  "id": "conf.service.cterm",
+  "title": "cterm",
+  "queryinfo": {
+    "xpath": "//services/cterm",
+    "iterable": false
+  },
+  "properties": {
+    "enable": {
+      "type": "boolean"
+    },
+    "host": {
+      "type": "string",
+      "default": "0.0.0.0"
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 65535,
+      "default": 5000
+    },
+    "hostshell": {
+      "type": "boolean"
+    }
+  }
+}

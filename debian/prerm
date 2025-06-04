@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  purge|remove|failed-upgrade|abort-install|abort-upgrade|disappear)
+    # remove python cache
+    rm -rfv /opt/omv_cterm/__pycache__
+    # stop and remove service
+    term="omv_cterm.service"
+    unit="/etc/systemd/system/${term}"
+    if [ -f "${unit}" ]; then
+      systemctl stop "${term}" || :
+      rm -f "${unit}"
+      systemctl daemon-reload
+    fi
+  ;;
+
+  upgrade)
+  ;;
+
+  *)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+exit 0

@@ -1,0 +1,27 @@
+[
+  {
+    "type": "rpc",
+    "id": "rpc.cterm.set",
+    "params": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "required": true
+        },
+        "host": {
+          "type": "string",
+          "required": true
+        },
+        "port": {
+          "type": "integer",
+          "required": true
+        },
+        "hostshell": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
+  }
+]

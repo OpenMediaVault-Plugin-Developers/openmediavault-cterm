@@ -1,0 +1,55 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-cterm-form-page
+  type: formPage
+  config:
+    request:
+      service: Cterm
+      get:
+        method: get
+      post:
+        method: set
+    fields:
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: false
+        hint: _("User must be in cterm group to login.")
+      - type: checkbox
+        name: hostshell
+        label: _("Host shell")
+        value: false
+        hint: _("Enable host shell option in container list.")
+      - type: textInput
+        name: host
+        label: _("Host")
+        value: "0.0.0.0"
+        hint: _("IP to listen on. Use 0.0.0.0 for all IPs.")
+      - type: numberInput
+        name: port
+        label: _("Port")
+        value: 5000
+        validators:
+          min: 1024
+          max: 65536
+          patternType: integer
+        hint: _("Port to listen on.")
+      - type: hidden
+        name: ssl
+        value: false
+        submitValue: false
+    buttons:
+      - text: _("Open UI")
+        enabledConstraint:
+          operator: "truthy"
+          arg0:
+            prop: "enable"
+        execute:
+          type: url
+          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port] | join | encodeuricomponent }}"
+      - template: submit
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/cterm"
