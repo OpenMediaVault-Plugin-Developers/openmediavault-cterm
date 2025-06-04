@@ -30,7 +30,7 @@
             <ul class="container-list">
                 {% for container in containers %}
                 <li class="container-item">
-                    <a href="{{ url_for('terminal', container=container.name) }}" class="container-link">
+                    <a href="{{ url_for('terminal', container=container.name, container_type=container.type) }}" class="container-link">
                         <div class="container-info">
                             <span class="container-name">{{ container.name }}</span>
                         </div>

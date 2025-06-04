@@ -185,7 +185,8 @@ def container_selection():
     return render_template('containers.html', containers=get_containers(), host_shell=HOST_SHELL)
 
 @app.route('/terminal/<container>')
-def terminal(container):
+@app.route('/terminal/<container>/<container_type>')
+def terminal(container, container_type=None):
     if not session.get('username'):
         return redirect(url_for('index', container=container))
     if container == '__host__':
@@ -198,6 +199,23 @@ def terminal(container):
             )
         else:
             return render_template('terminal.html', container='__host__', container_type='host', host_shell=HOST_SHELL)
+
+    if container_type:
+        if container_type == 'docker' and not is_docker_container(container):
+            return render_template(
+                'containers.html',
+                error=f"Docker container '{container}' not found",
+                containers=get_containers(),
+                host_shell=HOST_SHELL
+            )
+        elif container_type == 'lxc' and not is_lxc_container(container):
+            return render_template(
+                'containers.html',
+                error=f"LXC container '{container}' not found",
+                containers=get_containers(),
+                host_shell=HOST_SHELL
+            )
+        return render_template('terminal.html', container=container, container_type=container_type, host_shell=HOST_SHELL)
 
     if is_docker_container(container):
         return render_template('terminal.html', container=container, container_type='docker', host_shell=HOST_SHELL)
