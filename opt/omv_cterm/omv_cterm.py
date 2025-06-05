@@ -157,8 +157,8 @@ def index():
     container = request.args.get('container')
     container_type = request.args.get('container_type')
     if session.get('username'):
-        if container:
-            if container_type:
+        if container and container != 'None':
+            if container_type and container_type != 'None':
                 return redirect(url_for('terminal', container=container, container_type=container_type, host_shell=HOST_SHELL))
             else:
                 return redirect(url_for('terminal', container=container, host_shell=HOST_SHELL))
@@ -170,25 +170,21 @@ def index():
 def login():
     u = request.form.get('username')
     p = request.form.get('password')
+    container = request.form.get('container')
+    container_type = request.form.get('container_type')
     if not u or not p:
-        container = request.form.get('container')
-        container_type = request.form.get('container_type')
         return render_template('login.html', error='Username and password required', container=container, container_type=container_type)
     if not pam_authenticate(u, p):
-        container = request.form.get('container')
-        container_type = request.form.get('container_type')
         return render_template('login.html', error='Authentication failed', container=container, container_type=container_type)
     if not is_user_in_group(u, ALLOWED_GROUP):
-        container = request.form.get('container')
-        container_type = request.form.get('container_type')
         return render_template('login.html', error=f'Must be in {ALLOWED_GROUP} group', container=container, container_type=container_type)
     session['username'] = u
 
     container = request.form.get('container') or request.args.get('container')
     container_type = request.form.get('container_type') or request.args.get('container_type')
 
-    if container:
-        if container_type:
+    if container and container != 'None':
+        if container_type and container_type != 'None':
             return redirect(url_for('terminal', container=container, container_type=container_type))
         else:
             return redirect(url_for('terminal', container=container))
@@ -222,7 +218,7 @@ def terminal(container, container_type=None):
         else:
             return render_template('terminal.html', container='__host__', container_type='host', host_shell=HOST_SHELL)
 
-    if container_type:
+    if container_type and container_type != 'None':
         if container_type == 'docker' and not is_docker_container(container):
             return render_template(
                 'containers.html',
