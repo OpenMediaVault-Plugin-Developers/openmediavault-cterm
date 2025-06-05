@@ -155,23 +155,45 @@ def after_request(response):
 @app.route('/')
 def index():
     container = request.args.get('container')
+    container_type = request.args.get('container_type')
     if session.get('username'):
-        return redirect(url_for('terminal', container=container, host_shell=HOST_SHELL)) if container else redirect(url_for('container_selection'))
-    return render_template('login.html', container=container)
+        if container:
+            if container_type:
+                return redirect(url_for('terminal', container=container, container_type=container_type, host_shell=HOST_SHELL))
+            else:
+                return redirect(url_for('terminal', container=container, host_shell=HOST_SHELL))
+        else:
+            return redirect(url_for('container_selection'))
+    return render_template('login.html', container=container, container_type=container_type)
 
 @app.route('/login', methods=['POST'])
 def login():
     u = request.form.get('username')
     p = request.form.get('password')
     if not u or not p:
-        return render_template('login.html', error='Username and password required')
+        container = request.form.get('container')
+        container_type = request.form.get('container_type')
+        return render_template('login.html', error='Username and password required', container=container, container_type=container_type)
     if not pam_authenticate(u, p):
-        return render_template('login.html', error='Authentication failed')
+        container = request.form.get('container')
+        container_type = request.form.get('container_type')
+        return render_template('login.html', error='Authentication failed', container=container, container_type=container_type)
     if not is_user_in_group(u, ALLOWED_GROUP):
-        return render_template('login.html', error=f'Must be in {ALLOWED_GROUP} group')
+        container = request.form.get('container')
+        container_type = request.form.get('container_type')
+        return render_template('login.html', error=f'Must be in {ALLOWED_GROUP} group', container=container, container_type=container_type)
     session['username'] = u
-    c = request.form.get('container') or request.args.get('container')
-    return redirect(url_for('terminal', container=c)) if c else redirect(url_for('container_selection'))
+
+    container = request.form.get('container') or request.args.get('container')
+    container_type = request.form.get('container_type') or request.args.get('container_type')
+
+    if container:
+        if container_type:
+            return redirect(url_for('terminal', container=container, container_type=container_type))
+        else:
+            return redirect(url_for('terminal', container=container))
+    else:
+        return redirect(url_for('container_selection'))
 
 @app.route('/logout')
 def logout():
@@ -188,7 +210,7 @@ def container_selection():
 @app.route('/terminal/<container>/<container_type>')
 def terminal(container, container_type=None):
     if not session.get('username'):
-        return redirect(url_for('index', container=container))
+        return redirect(url_for('index', container=container, container_type=container_type))
     if container == '__host__':
         if not HOST_SHELL:
             return render_template(
