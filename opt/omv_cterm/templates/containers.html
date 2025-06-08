@@ -13,7 +13,7 @@
         <div class="header">
             <h1 class="title">
                 <i class="fab fa-docker"></i>
-                Container Terminal
+                {{ _('container_terminal') }}
                 <i class="fas fa-cube"></i>
             </h1>
             <div class="header-actions">
@@ -22,7 +22,7 @@
                 </button>
                 <button class="logout" onclick="window.location.href='{{ url_for('logout') }}'">
                     <i class="fas fa-sign-out-alt"></i>
-                    Logout
+                    {{ _('logout') }}
                 </button>
             </div>
         </div>
@@ -68,9 +68,10 @@
                 <div class="empty-icon">
                     <i class="fas fa-box-open"></i>
                 </div>
-                <p>No running containers</p>
+                <p>{{ _('no_container_running') }}</p>
             </div>
         {% endif %}
     </div>
     <script src="{{ url_for('static', filename='light-dark-theme.js') }}""></script>
 </body>
+

@@ -1,0 +1,23 @@
+{
+    "login_title": "Inicio de Sesión en Terminal",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "logout": "Cerrar Sesión",
+    "login_button": "Iniciar Sesión",
+    "auth_error": "Autenticación fallida",
+    "group_error": "Debe estar en el grupo {group}",
+    "required_error": "Usuario y contraseña requeridos",
+    "host_shell_disabled": "Shell del host desactivado",
+    "docker_not_found": "Contenedor Docker '{container}' no encontrado",
+    "lxc_not_found": "Contenedor LXC '{container}' no encontrado",
+    "container_not_found": "Contenedor '{container}' no encontrado",
+    "no_container_specified": "Error: No se especificó contenedor",
+    "terminal_create_failed": "Error: Fallo al crear terminal",
+    "terminal_init_failed": "Error: Fallo al inicializar terminal",
+    "no_shell_session": "No hay sesión shell activa",
+    "connected_lxc": "Conectado a LXC :: {container}",
+    "connected_docker": "Conectado a Docker :: {container}",
+    "container_terminal": "Terminal de Contenedor",
+    "no_container_running": "No hay contenedores en ejecución",
+    "connected_to": "Conectado a "
+}

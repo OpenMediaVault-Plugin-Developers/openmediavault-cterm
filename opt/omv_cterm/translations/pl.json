@@ -1,0 +1,23 @@
+{
+    "login_title": "Logowanie do Terminala",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "logout": "Wyloguj",
+    "login_button": "Zaloguj",
+    "auth_error": "Błąd uwierzytelniania",
+    "group_error": "Wymagana przynależność do grupy {group}",
+    "required_error": "Nazwa użytkownika i hasło są wymagane",
+    "host_shell_disabled": "Powłoka hosta jest wyłączona",
+    "docker_not_found": "Kontener Docker '{container}' nie znaleziony",
+    "lxc_not_found": "Kontener LXC '{container}' nie znaleziony",
+    "container_not_found": "Kontener '{container}' nie znaleziony",
+    "no_container_specified": "Błąd: Nie określono kontenera",
+    "terminal_create_failed": "Błąd: Nie udało się utworzyć terminala",
+    "terminal_init_failed": "Błąd: Nie udało się zainicjować terminala",
+    "no_shell_session": "Brak aktywnej sesji powłoki",
+    "connected_lxc": "Połączono z LXC :: {container}",
+    "connected_docker": "Połączono z Docker :: {container}",
+    "container_terminal": "Terminal Kontenera",
+    "no_container_running": "No running containers",
+    "connected_to": "Połączono z "
+}

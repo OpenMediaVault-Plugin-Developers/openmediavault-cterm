@@ -1,0 +1,23 @@
+{
+    "login_title": "Accesso Terminale",
+    "username": "Utente",
+    "password": "Password",
+    "logout": "Esci",
+    "login_button": "Accedi",
+    "auth_error": "Autenticazione fallita",
+    "group_error": "Devi appartenere al gruppo {group}",
+    "required_error": "Nome utente e password richiesti",
+    "host_shell_disabled": "Shell host disabilitata",
+    "docker_not_found": "Contenitore Docker '{container}' non trovato",
+    "lxc_not_found": "Contenitore LXC '{container}' non trovato",
+    "container_not_found": "Contenitore '{container}' non trovato",
+    "no_container_specified": "Errore: Nessun contenitore specificato",
+    "terminal_create_failed": "Errore: Creazione terminale fallita",
+    "terminal_init_failed": "Errore: Inizializzazione terminale fallita",
+    "no_shell_session": "Nessuna sessione shell attiva",
+    "connected_lxc": "Connesso a LXC :: {container}",
+    "connected_docker": "Connesso a Docker :: {container}",
+    "container_terminal": "Terminale Contenitore",
+    "no_container_running": "Nessun contenitore in esecuzione",
+    "connected_to": "Connesso a "
+}

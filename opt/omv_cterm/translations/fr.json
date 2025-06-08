@@ -1,0 +1,23 @@
+{
+    "login_title": "Connexion au Terminal",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "logout": "Déconnexion",
+    "login_button": "Connexion",
+    "auth_error": "Échec de l'authentification",
+    "group_error": "Doit être dans le groupe {group}",
+    "required_error": "Nom d'utilisateur et mot de passe requis",
+    "host_shell_disabled": "Shell hôte désactivé",
+    "docker_not_found": "Conteneur Docker '{container}' introuvable",
+    "lxc_not_found": "Conteneur LXC '{container}' introuvable",
+    "container_not_found": "Conteneur '{container}' introuvable",
+    "no_container_specified": "Erreur : Aucun conteneur spécifié",
+    "terminal_create_failed": "Erreur : Échec de création du terminal",
+    "terminal_init_failed": "Erreur : Échec d'initialisation du terminal",
+    "no_shell_session": "Aucune session shell active",
+    "connected_lxc": "Connecté à LXC :: {container}",
+    "connected_docker": "Connecté à Docker :: {container}",
+    "container_terminal": "Terminal de Conteneur",
+    "no_container_running": "Aucun conteneur en cours d'exécution",
+    "connected_to": "Connecté à "
+}
