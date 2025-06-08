@@ -1,9 +1,19 @@
 {
-  "login_title": "Terminal Login",
-  "username": "Username",
-  "password": "Password",
-  "login_button": "Login",
-  "auth_error": "Authentication failed",
-  "group_error": "Must be in {group} group",
-  "required_error": "Username and password required"
+    "login_title": "Terminal Login",
+    "username": "Username",
+    "password": "Password",
+    "login_button": "Login",
+    "auth_error": "Authentication failed",
+    "group_error": "Must be in {group} group",
+    "required_error": "Username and password required",
+    "host_shell_disabled": "Host Shell is disabled",
+    "docker_not_found": "Docker container '{container}' not found",
+    "lxc_not_found": "LXC container '{container}' not found",
+    "container_not_found": "Container '{container}' not found",
+    "no_container_specified": "Error: No container specified",
+    "terminal_create_failed": "Error: Failed to create terminal",
+    "terminal_init_failed": "Error: Failed to initialize terminal",
+    "no_shell_session": "No active shell session",
+    "connected_lxc": "Connected to LXC :: {container}",
+    "connected_docker": "Connected to Docker :: {container}"
 }
