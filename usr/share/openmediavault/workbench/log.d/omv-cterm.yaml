@@ -1,0 +1,28 @@
+version: "1.0"
+type: log
+data:
+  id: omv-cterm
+  text: _("CTerm")
+  columns:
+    - name: _("Date & Time")
+      sortable: true
+      prop: date
+      cellTemplateName: localeDateTime
+      flexGrow: 1
+    - name: _("Module")
+      sortable: true
+      prop: module
+      flexGrow: 1
+    - name: _("Level")
+      sortable: true
+      prop: level
+      flexGrow: 1
+    - name: _("Message")
+      sortable: true
+      prop: message
+      flexGrow: 4
+  request:
+    service: LogFile
+    method: getList
+    params:
+      id: omv-cterm
