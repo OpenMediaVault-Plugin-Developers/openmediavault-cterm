@@ -21,7 +21,7 @@
                 <i class="fas fa-server"></i> Containers
             </a>
             <a href="{{ url_for('logout') }}" class="btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <i class="fas fa-sign-out-alt"></i> {{ _('logout') }}
             </a>
         </div>
     </header>
@@ -30,7 +30,7 @@
         <div id="terminal"></div>
     </div>
     <div id="status">
-        <i class="fas fa-circle connected"></i> Connected to {{ container }}
+        <i class="fas fa-circle connected"></i> {{ _('connected_to') }} {{ container }}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>

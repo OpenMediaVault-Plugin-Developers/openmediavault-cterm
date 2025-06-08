@@ -2,6 +2,7 @@
     "login_title": "Terminal Login",
     "username": "Username",
     "password": "Password",
+    "logout": "Logout",
     "login_button": "Login",
     "auth_error": "Authentication failed",
     "group_error": "Must be in {group} group",
@@ -15,5 +16,8 @@
     "terminal_init_failed": "Error: Failed to initialize terminal",
     "no_shell_session": "No active shell session",
     "connected_lxc": "Connected to LXC :: {container}",
-    "connected_docker": "Connected to Docker :: {container}"
+    "connected_docker": "Connected to Docker :: {container}",
+    "container_terminal": "Container Terminal",
+    "no_container_running": "No running containers",
+    "connected_to": "Connected to "
 }

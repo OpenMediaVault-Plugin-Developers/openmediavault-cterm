@@ -2,6 +2,7 @@
     "login_title": "Terminal-Anmeldung",
     "username": "Benutzername",
     "password": "Passwort",
+    "logout": "Logout",
     "login_button": "Anmelden",
     "auth_error": "Authentifizierung fehlgeschlagen",
     "group_error": "Muss in der Gruppe {group} sein",
@@ -16,4 +17,7 @@
     "no_shell_session": "Keine aktive Shell-Sitzung",
     "connected_lxc": "Verbunden mit LXC :: {container}",
     "connected_docker": "Verbunden mit Docker :: {container}"
+    "container_terminal": "Container Terminal",
+    "no_container_running": "No running containers",
+    "connected_to": "Connected to "
 }
