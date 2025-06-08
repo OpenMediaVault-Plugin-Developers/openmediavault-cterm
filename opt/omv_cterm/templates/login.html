@@ -11,6 +11,36 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
+<div class="language-selector">
+    <div class="language-dropdown">
+        <button class="dropdown-toggle" aria-expanded="false">
+            <img src="{{ url_for('static', filename='flags/' + session.get('language', 'en') + '.png') }}"
+                 alt="{{ session.get('language', 'en') }}" width="20">
+            <span class="language-name">
+                {% if session.get('language', 'en') == 'en' %}English{% endif %}
+                {% if session.get('language', 'en') == 'pl' %}Polski{% endif %}
+                {% if session.get('language', 'en') == 'de' %}Deutsch{% endif %}
+            </span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+            {% for lang in available_languages %}
+            <li>
+                <a href="#" data-lang="{{ lang }}" class="{% if session.get('language', 'en') == lang %}active{% endif %}">
+                    <img src="{{ url_for('static', filename='flags/' + lang + '.png') }}"
+                         alt="{{ lang }}" width="20">
+                    <span>
+                        {% if lang == 'en' %}English{% endif %}
+                        {% if lang == 'pl' %}Polski{% endif %}
+                        {% if lang == 'de' %}Deutsch{% endif %}
+                    </span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
     <div class="container">
         <button id="themeToggle" class="theme-toggle">
             <i id="themeIcon" class="fas fa-moon"></i>
@@ -18,7 +48,7 @@
 
         <h1>
             <i class="fab fa-docker"></i>
-            Terminal Login
+            {{ _('login_title') }}
             <i class="fas fa-cube"></i>
         </h1>
         
@@ -31,23 +61,24 @@
         
         <form action="{{ url_for('login') }}" method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <label for="username">{{ _('username') }}</label>
+                <input type="text" id="username" name="username" placeholder="{{ _('username') }}" required>
             </div>
             
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label for="password">{{ _('password') }}</label>
+                <input type="password" id="password" name="password" placeholder="{{ _('password') }}" required>
             </div>
 
             <input type="hidden" name="container" value="{{ container }}">
             <input type="hidden" name="container_type" value="{{ container_type }}">
             
             <button type="submit">
-                <i class="fas fa-sign-in-alt"></i> Login
+                <i class="fas fa-sign-in-alt"></i> {{ _('login_button') }}
             </button>
         </form>
     </div>
-    <script src="{{ url_for('static', filename='light-dark-theme.js') }}""></script>
+    <script src="{{ url_for('static', filename='light-dark-theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='language.js') }}"></script>
 </body>
 </html>

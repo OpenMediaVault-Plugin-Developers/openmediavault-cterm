@@ -1,0 +1,9 @@
+{
+  "login_title": "Terminal Login",
+  "username": "Username",
+  "password": "Password",
+  "login_button": "Login",
+  "auth_error": "Authentication failed",
+  "group_error": "Must be in {group} group",
+  "required_error": "Username and password required"
+}

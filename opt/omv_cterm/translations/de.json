@@ -1,0 +1,9 @@
+{
+  "login_title": "Terminal-Anmeldung",
+  "username": "Benutzername",
+  "password": "Passwort",
+  "login_button": "Anmelden",
+  "auth_error": "Authentifizierung fehlgeschlagen",
+  "group_error": "Muss in der Gruppe {group} sein",
+  "required_error": "Benutzername und Passwort erforderlich"
+}

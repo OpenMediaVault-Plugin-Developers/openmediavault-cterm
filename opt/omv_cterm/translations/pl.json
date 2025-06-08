@@ -1,0 +1,9 @@
+{
+  "login_title": "Logowanie do Terminala",
+  "username": "Nazwa użytkownika",
+  "password": "Hasło",
+  "login_button": "Zaloguj",
+  "auth_error": "Błąd uwierzytelniania",
+  "group_error": "Wymagana przynależność do grupy {group}",
+  "required_error": "Nazwa użytkownika i hasło są wymagane"
+}

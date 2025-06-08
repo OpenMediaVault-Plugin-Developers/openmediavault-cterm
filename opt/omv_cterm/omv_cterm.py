@@ -25,13 +25,13 @@ import termios
 import tty
 import json
 from typing import Dict, Tuple, Optional, List, Any
+from pathlib import Path
 
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask_socketio import SocketIO, emit
 import configparser
 import PAM
 from dataclasses import dataclass
-from pathlib import Path
 
 # Constants
 CONFIG_FILE = "/etc/omv_cterm.conf"
@@ -39,6 +39,9 @@ DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 5000
 ALLOWED_GROUP = "cterm"
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+TRANSLATIONS_DIR = Path(__file__).parent / 'translations'
+SUPPORTED_LANGUAGES = ['en', 'pl', 'de']  # Add more as needed
+DEFAULT_LANGUAGE = 'en'
 
 # Setup logging
 logging.basicConfig(
@@ -118,6 +121,54 @@ socketio = SocketIO(
 
 # Active shell sessions {sid: (master_fd, child_pid)}
 shells: Dict[str, Tuple[int, int]] = {}
+
+# Load translations
+translations = {}
+
+def load_translations():
+    """Load translations from JSON files"""
+    global translations
+    for lang in SUPPORTED_LANGUAGES:
+        try:
+            with open(TRANSLATIONS_DIR / f'{lang}.json', 'r', encoding='utf-8') as f:
+                translations[lang] = json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load {lang} translations: {e}")
+            translations[lang] = {}
+
+load_translations()
+
+def get_translation(key: str, lang: str = None) -> str:
+    """Get translation for a key in specified language"""
+    if lang is None:
+        lang = session.get('language', DEFAULT_LANGUAGE)
+    return translations.get(lang, {}).get(key, key)
+
+@app.context_processor
+def inject_translations():
+    """Make translation function available in all templates"""
+    lang = session.get('language', DEFAULT_LANGUAGE)
+    language_names = {
+        'en': 'English',
+        'pl': 'Polski',
+        'de': 'Deutsch'
+    }
+    return {
+        '_': lambda x: translations.get(lang, {}).get(x, x),
+        'available_languages': SUPPORTED_LANGUAGES,
+        'current_language': lang,
+        'language_names': language_names
+    }
+
+@app.route('/set_language', methods=['POST'])
+def set_language():
+    """Set language preference"""
+    if request.method == 'POST':
+        lang = request.json.get('language', DEFAULT_LANGUAGE)
+        if lang in SUPPORTED_LANGUAGES:
+            session['language'] = lang
+            return jsonify({'success': True})
+    return jsonify({'success': False}), 400
 
 def handle_sigterm(signum, frame):
     """Cleanup handler for SIGTERM"""
@@ -275,7 +326,11 @@ def index():
             return redirect(url_for('terminal', container=container, host_shell=config.host_shell))
         return redirect(url_for('container_selection'))
     
-    return render_template('login.html', container=container, container_type=container_type)
+    return render_template(
+        'login.html', 
+        container=container, 
+        container_type=container_type
+    )
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -284,11 +339,12 @@ def login():
     password = request.form.get('password', '')
     container = request.form.get('container')
     container_type = request.form.get('container_type')
+    lang = session.get('language', DEFAULT_LANGUAGE)
     
     if not username or not password:
         return render_template(
             'login.html', 
-            error='Username and password required',
+            error=get_translation('required_error', lang),
             container=container,
             container_type=container_type
         )
@@ -297,7 +353,7 @@ def login():
         logger.warning(f"Failed login attempt for user: {username}")
         return render_template(
             'login.html', 
-            error='Authentication failed',
+            error=get_translation('auth_error', lang),
             container=container,
             container_type=container_type
         )
@@ -306,7 +362,7 @@ def login():
         logger.warning(f"User {username} not in required group {ALLOWED_GROUP}")
         return render_template(
             'login.html', 
-            error=f'Must be in {ALLOWED_GROUP} group',
+            error=get_translation('group_error', lang).format(group=ALLOWED_GROUP),
             container=container,
             container_type=container_type
         )
@@ -359,7 +415,7 @@ def terminal(container: str, container_type: Optional[str] = None):
         if not config.host_shell:
             return render_template(
                 'containers.html',
-                error="Host Shell is disabled",
+                error=get_translation('host_shell_disabled', session.get('language', DEFAULT_LANGUAGE)),
                 containers=get_containers(),
                 host_shell=config.host_shell
             )
@@ -374,14 +430,14 @@ def terminal(container: str, container_type: Optional[str] = None):
         if container_type == 'docker' and not is_docker_container(container):
             return render_template(
                 'containers.html',
-                error=f"Docker container '{container}' not found",
+                error=get_translation('docker_not_found', session.get('language', DEFAULT_LANGUAGE)).format(container=container),
                 containers=get_containers(),
                 host_shell=config.host_shell
             )
         if container_type == 'lxc' and not is_lxc_container(container):
             return render_template(
                 'containers.html',
-                error=f"LXC container '{container}' not found",
+                error=get_translation('lxc_not_found', session.get('language', DEFAULT_LANGUAGE)).format(container=container),
                 containers=get_containers(),
                 host_shell=config.host_shell
             )
@@ -410,7 +466,7 @@ def terminal(container: str, container_type: Optional[str] = None):
 
     return render_template(
         'containers.html',
-        error=f"Container '{container}' not found",
+        error=get_translation('container_not_found', session.get('language', DEFAULT_LANGUAGE)).format(container=container),
         containers=get_containers(),
         host_shell=config.host_shell
     )
@@ -465,12 +521,13 @@ def start_terminal(data: Dict[str, Any]):
     container_type = data.get('container_type', 'docker')
     sid = request.sid
     
-    if container == '__host__' and not config.host_shell:
-        emit('output', 'Error: Host shell is disabled\n')
-        return
+    if container == '__host__':
+        if not config.host_shell:
+            emit('output', get_translation('host_shell_disabled', session.get('language', DEFAULT_LANGUAGE)) + '\n')
+            return
     
     if not container:
-        emit('output', 'Error: No container specified\n')
+        emit('output', get_translation('no_container_specified', session.get('language', DEFAULT_LANGUAGE)) + '\n')
         return
     
     if sid in shells:
@@ -481,7 +538,7 @@ def start_terminal(data: Dict[str, Any]):
         pid, master_fd = pty.fork()
     except OSError as e:
         logger.error(f"Failed to fork PTY: {e}")
-        emit('output', 'Error: Failed to create terminal\n')
+        emit('output', get_translation('terminal_create_failed', session.get('language', DEFAULT_LANGUAGE)) + '\n')
         return
     
     if pid == 0:  # Child process
@@ -551,8 +608,9 @@ def start_terminal(data: Dict[str, Any]):
             ).start()
             
             welcome_msg = (
-                f"Connected to LXC :: {container}\r\n" if container_type == 'lxc'
-                else f"Connected to Docker :: {container}\r\n"
+                get_translation('connected_lxc', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n' 
+                if container_type == 'lxc'
+                else get_translation('connected_docker', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n'
             )
             emit('output', welcome_msg)
             logger.info(f"Started terminal session for {container} ({container_type})")
@@ -564,7 +622,7 @@ def start_terminal(data: Dict[str, Any]):
                 os.close(master_fd)
             except OSError:
                 pass
-            emit('output', 'Error: Failed to initialize terminal\n')
+            emit('output', get_translation('terminal_init_failed', session.get('language', DEFAULT_LANGUAGE)) + '\n')
 
 @socketio.on('terminal_input')
 def terminal_input(data: Dict[str, str]):
@@ -583,7 +641,7 @@ def terminal_input(data: Dict[str, str]):
         except OSError as e:
             logger.debug(f"Failed to write to PTY for {sid}: {e}")
     else:
-        emit('output', 'No active shell session\n')
+        emit('output', get_translation('no_shell_session', session.get('language', DEFAULT_LANGUAGE)) + '\n')
 
 @socketio.on('resize')
 def resize(data: Dict[str, int]):
