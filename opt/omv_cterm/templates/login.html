@@ -17,9 +17,7 @@
             <img src="{{ url_for('static', filename='flags/' + session.get('language', 'en') + '.png') }}"
                  alt="{{ session.get('language', 'en') }}" width="20">
             <span class="language-name">
-                {% if session.get('language', 'en') == 'en' %}English{% endif %}
-                {% if session.get('language', 'en') == 'pl' %}Polski{% endif %}
-                {% if session.get('language', 'en') == 'de' %}Deutsch{% endif %}
+                 {{ language_names[session.get('language', 'en')] }}
             </span>
             <i class="fas fa-chevron-down"></i>
         </button>
