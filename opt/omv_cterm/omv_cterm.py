@@ -6,8 +6,7 @@
 # License version 2. This program is licensed "as is" without any
 # warranty of any kind, whether express or implied.
 #
-# version: 1.3.1
-# Modernized version with improved structure, logging, and performance
+# version: 2.0.0
 
 import os
 import sys
@@ -67,7 +66,7 @@ class ServerConfig:
 def load_config() -> ServerConfig:
     """Load and validate configuration from file"""
     cfg = configparser.ConfigParser()
-    
+
     # Set defaults
     cfg["server"] = {
         "host": DEFAULT_HOST,
@@ -77,14 +76,14 @@ def load_config() -> ServerConfig:
         "ssl_key": "",
         "host_shell": "false"
     }
-    
+
     try:
         cfg.read(CONFIG_FILE)
     except Exception as e:
         logger.error(f"Failed to read config file: {e}")
-    
+
     srv = cfg["server"]
-    
+
     try:
         return ServerConfig(
             host=srv.get("host", DEFAULT_HOST),
@@ -113,7 +112,7 @@ for log_name in ['werkzeug', 'engineio', 'socketio']:
     logging.getLogger(log_name).setLevel(logging.WARNING)
 
 socketio = SocketIO(
-    app, 
+    app,
     async_mode='threading',
     logger=logger.getEffectiveLevel() <= logging.DEBUG,
     engineio_logger=logger.getEffectiveLevel() <= logging.DEBUG
@@ -212,7 +211,7 @@ def pam_authenticate(username: str, password: str) -> bool:
             else:
                 resp.append(("", 0))
         return resp
-    
+
     try:
         pam = PAM.pam()
         pam.start("other")
@@ -248,7 +247,7 @@ def get_lxc_containers() -> List[Dict[str, str]]:
     """Get list of running LXC containers"""
     if not shutil.which("virsh"):
         return []
-    
+
     try:
         result = subprocess.run(
             ["virsh", "-c", "lxc:///", "list", "--state-running", "--name"],
@@ -274,7 +273,7 @@ def is_lxc_container(container_name: str) -> bool:
     """Check if container is an LXC container"""
     if not shutil.which("virsh"):
         return False
-    
+
     try:
         subprocess.run(
             ["virsh", "-c", "lxc:///", "dominfo", container_name],
@@ -317,22 +316,22 @@ def index():
     """Main entry point with container selection"""
     container = request.args.get('container')
     container_type = request.args.get('container_type')
-    
+
     if session.get('username'):
         if container and container != 'None':
             if container_type and container_type != 'None':
                 return redirect(url_for(
-                    'terminal', 
-                    container=container, 
-                    container_type=container_type, 
+                    'terminal',
+                    container=container,
+                    container_type=container_type,
                     host_shell=config.host_shell
                 ))
             return redirect(url_for('terminal', container=container, host_shell=config.host_shell))
         return redirect(url_for('container_selection'))
-    
+
     return render_template(
-        'login.html', 
-        container=container, 
+        'login.html',
+        container=container,
         container_type=container_type
     )
 
@@ -344,48 +343,48 @@ def login():
     container = request.form.get('container')
     container_type = request.form.get('container_type')
     lang = session.get('language', DEFAULT_LANGUAGE)
-    
+
     if not username or not password:
         return render_template(
-            'login.html', 
+            'login.html',
             error=get_translation('required_error', lang),
             container=container,
             container_type=container_type
         )
-    
+
     if not pam_authenticate(username, password):
         logger.warning(f"Failed login attempt for user: {username}")
         return render_template(
-            'login.html', 
+            'login.html',
             error=get_translation('auth_error', lang),
             container=container,
             container_type=container_type
         )
-    
+
     if not is_user_in_group(username, ALLOWED_GROUP):
         logger.warning(f"User {username} not in required group {ALLOWED_GROUP}")
         return render_template(
-            'login.html', 
+            'login.html',
             error=get_translation('group_error', lang).format(group=ALLOWED_GROUP),
             container=container,
             container_type=container_type
         )
-    
+
     session['username'] = username
     logger.info(f"User {username} logged in successfully")
-    
+
     container = request.form.get('container') or request.args.get('container')
     container_type = request.form.get('container_type') or request.args.get('container_type')
 
     if container and container != 'None':
         if container_type and container_type != 'None':
             return redirect(url_for(
-                'terminal', 
-                container=container, 
+                'terminal',
+                container=container,
                 container_type=container_type
             ))
         return redirect(url_for('terminal', container=container))
-    
+
     return redirect(url_for('container_selection'))
 
 @app.route('/logout')
@@ -401,10 +400,10 @@ def container_selection():
     """Show container selection page"""
     if not session.get('username'):
         return redirect(url_for('index'))
-    
+
     return render_template(
-        'containers.html', 
-        containers=get_containers(), 
+        'containers.html',
+        containers=get_containers(),
         host_shell=config.host_shell
     )
 
@@ -414,7 +413,7 @@ def terminal(container: str, container_type: Optional[str] = None):
     """Terminal page handler"""
     if not session.get('username'):
         return redirect(url_for('index', container=container, container_type=container_type))
-    
+
     if container == '__host__':
         if not config.host_shell:
             return render_template(
@@ -424,9 +423,9 @@ def terminal(container: str, container_type: Optional[str] = None):
                 host_shell=config.host_shell
             )
         return render_template(
-            'terminal.html', 
-            container='__host__', 
-            container_type='host', 
+            'terminal.html',
+            container='__host__',
+            container_type='host',
             host_shell=config.host_shell
         )
 
@@ -446,25 +445,25 @@ def terminal(container: str, container_type: Optional[str] = None):
                 host_shell=config.host_shell
             )
         return render_template(
-            'terminal.html', 
-            container=container, 
-            container_type=container_type, 
+            'terminal.html',
+            container=container,
+            container_type=container_type,
             host_shell=config.host_shell
         )
 
     if is_docker_container(container):
         return render_template(
-            'terminal.html', 
-            container=container, 
-            container_type='docker', 
+            'terminal.html',
+            container=container,
+            container_type='docker',
             host_shell=config.host_shell
         )
 
     if is_lxc_container(container):
         return render_template(
-            'terminal.html', 
-            container=container, 
-            container_type='lxc', 
+            'terminal.html',
+            container=container,
+            container_type='lxc',
             host_shell=config.host_shell
         )
 
@@ -524,44 +523,44 @@ def start_terminal(data: Dict[str, Any]):
     container = data.get('container')
     container_type = data.get('container_type', 'docker')
     sid = request.sid
-    
+
     if container == '__host__':
         if not config.host_shell:
             emit('output', get_translation('host_shell_disabled', session.get('language', DEFAULT_LANGUAGE)) + '\n')
             return
-    
+
     if not container:
         emit('output', get_translation('no_container_specified', session.get('language', DEFAULT_LANGUAGE)) + '\n')
         return
-    
+
     if sid in shells:
         emit('output', f'[{container}]$ ')
         return
-    
+
     try:
         pid, master_fd = pty.fork()
     except OSError as e:
         logger.error(f"Failed to fork PTY: {e}")
         emit('output', get_translation('terminal_create_failed', session.get('language', DEFAULT_LANGUAGE)) + '\n')
         return
-    
+
     if pid == 0:  # Child process
         try:
             env = os.environ.copy()
             env['TERM'] = data.get('termType', 'xterm')
-            
+
             if container == '__host__':
                 username = session.get('username')
                 if not username:
                     os._exit(1)
-                
+
                 pw = pwd.getpwnam(username)
                 os.setgid(pw.pw_gid)
                 os.setuid(pw.pw_uid)
-                
+
                 home_dir = pw.pw_dir if os.path.isdir(pw.pw_dir) else '/tmp'
                 os.chdir(home_dir)
-                
+
                 env.update({
                     'HOME': pw.pw_dir,
                     'PWD': home_dir,
@@ -569,17 +568,17 @@ def start_terminal(data: Dict[str, Any]):
                     'LOGNAME': username
                 })
                 env.pop('MAIL', None)
-                
+
                 args = ['--login', '-i']
                 os.execvpe('bash', args, env)
-            
+
             elif container_type == 'lxc':
                 args = ['virsh', '-c', 'lxc:///', 'console', container]
                 os.execvpe('virsh', args, env)
-            
+
             else:  # Docker
                 base_args = ['docker', 'exec', '-i', '-t', container]
-                
+
                 # Check for bash availability
                 check = subprocess.call(
                     base_args + ['bash', '-c', 'exit 0'],
@@ -587,14 +586,14 @@ def start_terminal(data: Dict[str, Any]):
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL
                 )
-                
+
                 shell_args = ['bash', '--noprofile', '--norc', '-i'] if check == 0 else ['sh', '-i']
                 os.execvpe('docker', base_args + shell_args, env)
-        
+
         except Exception as e:
             logger.error(f"Failed to start shell: {e}")
             os._exit(1)
-    
+
     else:  # Parent process
         try:
             tty.setraw(master_fd)
@@ -603,22 +602,22 @@ def start_terminal(data: Dict[str, Any]):
                 attrs[3] |= termios.ECHO
                 attrs[1] |= termios.OPOST | termios.ONLCR
                 termios.tcsetattr(master_fd, termios.TCSADRAIN, attrs)
-            
+
             shells[sid] = (master_fd, pid)
             threading.Thread(
                 target=read_and_emit,
                 args=(master_fd, sid),
                 daemon=True
             ).start()
-            
+
             welcome_msg = (
-                get_translation('connected_lxc', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n' 
+                get_translation('connected_lxc', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n'
                 if container_type == 'lxc'
                 else get_translation('connected_docker', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n'
             )
             emit('output', welcome_msg)
             logger.info(f"Started terminal session for {container} ({container_type})")
-        
+
         except Exception as e:
             logger.error(f"Failed to setup terminal: {e}")
             try:
@@ -633,10 +632,10 @@ def terminal_input(data: Dict[str, str]):
     """Handle terminal input from client"""
     sid = request.sid
     inp = data.get('input', '')
-    
+
     if not inp:
         return
-    
+
     entry = shells.get(sid)
     if entry:
         try:
@@ -652,10 +651,10 @@ def resize(data: Dict[str, int]):
     """Handle terminal resize"""
     sid = request.sid
     entry = shells.get(sid)
-    
+
     if not entry:
         return
-    
+
     try:
         master_fd, child_pid = entry
         rows, cols = data['rows'], data['cols']
@@ -670,7 +669,7 @@ def on_close_terminal(data: Dict[str, Any]):
     """Close terminal session"""
     sid = request.sid
     entry = shells.pop(sid, None)
-    
+
     if entry:
         master_fd, child_pid = entry
         try:
@@ -686,20 +685,20 @@ def on_close_terminal(data: Dict[str, Any]):
 if __name__ == '__main__':
     try:
         logger.info(f"Starting server on {config.host}:{config.port}")
-        
+
         run_kwargs = {
             'host': config.host,
             'port': config.port,
             'allow_unsafe_werkzeug': True, # Only for development!
             'log_output': False
         }
-        
+
         if config.use_https and config.ssl_cert and config.ssl_key:
             if not Path(config.ssl_cert).is_file() or not Path(config.ssl_key).is_file():
                 logger.error("SSL certificate or key file not found")
                 sys.exit(1)
             run_kwargs['ssl_context'] = (config.ssl_cert, config.ssl_key)
-        
+
         socketio.run(app, **run_kwargs)
     except Exception as e:
         logger.error(f"Server error: {e}")
