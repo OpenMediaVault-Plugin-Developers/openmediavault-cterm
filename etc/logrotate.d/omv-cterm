@@ -1,0 +1,8 @@
+/var/log/omv_cterm.log
+{
+  monthly
+  missingok
+  rotate 12
+  compress
+  notifempty
+}

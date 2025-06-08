@@ -1,3 +1,4 @@
 usr/share/openmediavault/*  usr/share/openmediavault
 srv/*  srv
 opt/omv_cterm/*  opt/omv_cterm
+etc/*  etc
