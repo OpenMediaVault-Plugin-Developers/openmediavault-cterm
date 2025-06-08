@@ -1,0 +1,23 @@
+{
+    "login_title": "Терминал - Вход",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "logout": "Выход",
+    "login_button": "Войти",
+    "auth_error": "Ошибка аутентификации",
+    "group_error": "Необходимо состоять в группе {group}",
+    "required_error": "Требуется имя пользователя и пароль",
+    "host_shell_disabled": "Оболочка хоста отключена",
+    "docker_not_found": "Контейнер Docker '{container}' не найден",
+    "lxc_not_found": "Контейнер LXC '{container}' не найден",
+    "container_not_found": "Контейнер '{container}' не найден",
+    "no_container_specified": "Ошибка: Контейнер не указан",
+    "terminal_create_failed": "Ошибка: Не удалось создать терминал",
+    "terminal_init_failed": "Ошибка: Не удалось инициализировать терминал",
+    "no_shell_session": "Нет активной сессии оболочки",
+    "connected_lxc": "Подключено к LXC :: {container}",
+    "connected_docker": "Подключено к Docker :: {container}",
+    "container_terminal": "Терминал Контейнера",
+    "no_container_running": "Нет работающих контейнеров",
+    "connected_to": "Подключено к "
+}

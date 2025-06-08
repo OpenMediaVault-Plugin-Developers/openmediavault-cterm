@@ -30,9 +30,7 @@
                     <img src="{{ url_for('static', filename='flags/' + lang + '.png') }}"
                          alt="{{ lang }}" width="20">
                     <span>
-                        {% if lang == 'en' %}English{% endif %}
-                        {% if lang == 'pl' %}Polski{% endif %}
-                        {% if lang == 'de' %}Deutsch{% endif %}
+                        {{ language_names[lang] }}
                     </span>
                 </a>
             </li>
