@@ -262,6 +262,29 @@
         [data-theme="dark"] .dropdown-menu li a:hover {
             background-color: rgba(36, 150, 237, 0.2);
         }
+
+        /* RTL Support */
+        [lang="ar"], [lang="he"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        [lang="ar"] .dropdown-toggle,
+        [lang="he"] .dropdown-toggle {
+            flex-direction: row-reverse;
+        }
+
+        [lang="ar"] .dropdown-menu li a,
+        [lang="he"] .dropdown-menu li a {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        [lang="ar"] .fa-chevron-down,
+        [lang="he"] .fa-chevron-down {
+            margin-left: 0;
+            margin-right: auto;
+        }
         
         @media (max-width: 480px) {
             .language-selector {

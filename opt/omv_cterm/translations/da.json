@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminal Login",
+    "username": "Brugernavn",
+    "password": "Adgangskode",
+    "logout": "Log ud",
+    "login_button": "Log ind",
+    "auth_error": "Godkendelse mislykkedes",
+    "group_error": "Skal være i gruppen {group}",
+    "required_error": "Brugernavn og adgangskode kræves",
+    "host_shell_disabled": "Værts-shell deaktiveret",
+    "docker_not_found": "Docker container '{container}' ikke fundet",
+    "lxc_not_found": "LXC container '{container}' ikke fundet",
+    "container_not_found": "Container '{container}' ikke fundet",
+    "no_container_specified": "Fejl: Ingen container angivet",
+    "terminal_create_failed": "Fejl: Kunne ikke oprette terminal",
+    "terminal_init_failed": "Fejl: Kunne ikke initialisere terminal",
+    "no_shell_session": "Ingen aktiv shell-session",
+    "connected_lxc": "Forbundet til LXC :: {container}",
+    "connected_docker": "Forbundet til Docker :: {container}",
+    "container_terminal": "Container Terminal",
+    "no_container_running": "Ingen containere kører",
+    "connected_to": "Forbundet til "
+}

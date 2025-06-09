@@ -1,0 +1,23 @@
+{
+    "login_title": "Prijava u Terminal",
+    "username": "Korisničko ime",
+    "password": "Lozinka",
+    "logout": "Odjava",
+    "login_button": "Prijava",
+    "auth_error": "Autentifikacija neuspješna",
+    "group_error": "Morate biti u grupi {group}",
+    "required_error": "Potrebno je korisničko ime i lozinka",
+    "host_shell_disabled": "Host shell onemogućen",
+    "docker_not_found": "Docker spremnik '{container}' nije pronađen",
+    "lxc_not_found": "LXC spremnik '{container}' nije pronađen",
+    "container_not_found": "Spremnik '{container}' nije pronađen",
+    "no_container_specified": "Greška: Spremnik nije specificiran",
+    "terminal_create_failed": "Greška: Neuspješno stvaranje terminala",
+    "terminal_init_failed": "Greška: Neuspješna inicijalizacija terminala",
+    "no_shell_session": "Nema aktivne shell sesije",
+    "connected_lxc": "Povezan na LXC :: {container}",
+    "connected_docker": "Povezan na Docker :: {container}",
+    "container_terminal": "Terminal Spremnika",
+    "no_container_running": "Nema pokrenutih spremnika",
+    "connected_to": "Povezan na "
+}

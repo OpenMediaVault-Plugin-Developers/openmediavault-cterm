@@ -1,0 +1,23 @@
+{
+    "login_title": "Вхід у Термінал",
+    "username": "Ім'я користувача",
+    "password": "Пароль",
+    "logout": "Вийти",
+    "login_button": "Увійти",
+    "auth_error": "Помилка автентифікації",
+    "group_error": "Потрібно бути в групі {group}",
+    "required_error": "Потрібно ім'я користувача та пароль",
+    "host_shell_disabled": "Шел хоста вимкнено",
+    "docker_not_found": "Контейнер Docker '{container}' не знайдено",
+    "lxc_not_found": "Контейнер LXC '{container}' не знайдено",
+    "container_not_found": "Контейнер '{container}' не знайдено",
+    "no_container_specified": "Помилка: Контейнер не вказано",
+    "terminal_create_failed": "Помилка: Не вдалося створити термінал",
+    "terminal_init_failed": "Помилка: Не вдалося ініціалізувати термінал",
+    "no_shell_session": "Немає активної сесії шелу",
+    "connected_lxc": "Підключено до LXC :: {container}",
+    "connected_docker": "Підключено до Docker :: {container}",
+    "container_terminal": "Термінал Контейнера",
+    "no_container_running": "Немає запущених контейнерів",
+    "connected_to": "Підключено до "
+}

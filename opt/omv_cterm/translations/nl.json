@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminal Aanmelding",
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "logout": "Uitloggen",
+    "login_button": "Inloggen",
+    "auth_error": "Authenticatie mislukt",
+    "group_error": "Moet in groep {group} zitten",
+    "required_error": "Gebruikersnaam en wachtwoord vereist",
+    "host_shell_disabled": "Host shell uitgeschakeld",
+    "docker_not_found": "Docker container '{container}' niet gevonden",
+    "lxc_not_found": "LXC container '{container}' niet gevonden",
+    "container_not_found": "Container '{container}' niet gevonden",
+    "no_container_specified": "Fout: Geen container opgegeven",
+    "terminal_create_failed": "Fout: Kon terminal niet aanmaken",
+    "terminal_init_failed": "Fout: Kon terminal niet initialiseren",
+    "no_shell_session": "Geen actieve shell sessie",
+    "connected_lxc": "Verbonden met LXC :: {container}",
+    "connected_docker": "Verbonden met Docker :: {container}",
+    "container_terminal": "Container Terminal",
+    "no_container_running": "Geen actieve containers",
+    "connected_to": "Verbonden met "
+}

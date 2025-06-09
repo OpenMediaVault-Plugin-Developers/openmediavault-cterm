@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminaali Kirjautuminen",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "logout": "Kirjaudu ulos",
+    "login_button": "Kirjaudu sisään",
+    "auth_error": "Tunnistautuminen epäonnistui",
+    "group_error": "Täytyy kuulua ryhmään {group}",
+    "required_error": "Käyttäjätunnus ja salasana vaaditaan",
+    "host_shell_disabled": "Isäntäkuori pois käytöstä",
+    "docker_not_found": "Docker-säiliötä '{container}' ei löytynyt",
+    "lxc_not_found": "LXC-säiliötä '{container}' ei löytynyt",
+    "container_not_found": "Säiliötä '{container}' ei löytynyt",
+    "no_container_specified": "Virhe: Säiliötä ei määritetty",
+    "terminal_create_failed": "Virhe: Terminaalin luonti epäonnistui",
+    "terminal_init_failed": "Virhe: Terminaalin alustus epäonnistui",
+    "no_shell_session": "Ei aktiivista kuoria",
+    "connected_lxc": "Yhdistetty LXC :: {container}",
+    "connected_docker": "Yhdistetty Docker :: {container}",
+    "container_terminal": "Säiliöterminaali",
+    "no_container_running": "Ei käynnissä olevia säiliöitä",
+    "connected_to": "Yhdistetty "
+}

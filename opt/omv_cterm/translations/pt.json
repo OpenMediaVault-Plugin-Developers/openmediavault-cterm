@@ -1,0 +1,23 @@
+{
+    "login_title": "Login no Terminal",
+    "username": "Utilizador",
+    "password": "Palavra-passe",
+    "logout": "Sair",
+    "login_button": "Entrar",
+    "auth_error": "Autenticação falhou",
+    "group_error": "Deve pertencer ao grupo {group}",
+    "required_error": "Utilizador e palavra-passe necessários",
+    "host_shell_disabled": "Shell do hospedeiro desativado",
+    "docker_not_found": "Contentor Docker '{container}' não encontrado",
+    "lxc_not_found": "Contentor LXC '{container}' não encontrado",
+    "container_not_found": "Contentor '{container}' não encontrado",
+    "no_container_specified": "Erro: Nenhum contentor especificado",
+    "terminal_create_failed": "Erro: Falha ao criar terminal",
+    "terminal_init_failed": "Erro: Falha ao iniciar terminal",
+    "no_shell_session": "Nenhuma sessão ativa",
+    "connected_lxc": "Conectado ao LXC :: {container}",
+    "connected_docker": "Conectado ao Docker :: {container}",
+    "container_terminal": "Terminal de Contentor",
+    "no_container_running": "Nenhum contentor em execução",
+    "connected_to": "Conectado a "
+}
