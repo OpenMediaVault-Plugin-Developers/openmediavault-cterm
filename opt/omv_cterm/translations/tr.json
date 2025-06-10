@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminal Girişi",
+    "username": "Kullanıcı Adı",
+    "password": "Parola",
+    "logout": "Çıkış Yap",
+    "login_button": "Giriş Yap",
+    "auth_error": "Kimlik doğrulama başarısız",
+    "group_error": "{group} grubunda olmalı",
+    "required_error": "Kullanıcı adı ve parola gereklidir",
+    "host_shell_disabled": "Ana bilgisayar kabuğu devre dışı",
+    "docker_not_found": "Docker konteyneri '{container}' bulunamadı",
+    "lxc_not_found": "LXC konteyneri '{container}' bulunamadı",
+    "container_not_found": "Konteyner '{container}' bulunamadı",
+    "no_container_specified": "Hata: Konteyner belirtilmedi",
+    "terminal_create_failed": "Hata: Terminal oluşturulamadı",
+    "terminal_init_failed": "Hata: Terminal başlatılamadı",
+    "no_shell_session": "Aktif kabuk oturumu yok",
+    "connected_lxc": "LXC'ye bağlandı :: {container}",
+    "connected_docker": "Docker'a bağlandı :: {container}",
+    "container_terminal": "Konteyner Terminali",
+    "no_container_running": "Çalışan konteyner yok",
+    "connected_to": "Bağlandı: "
+}

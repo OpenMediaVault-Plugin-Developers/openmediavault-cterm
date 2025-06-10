@@ -1,0 +1,23 @@
+{
+    "login_title": "Autentificare Terminal",
+    "username": "Utilizator",
+    "password": "Parolă",
+    "logout": "Deconectare",
+    "login_button": "Conectare",
+    "auth_error": "Autentificare eșuată",
+    "group_error": "Trebuie să fii în grupul {group}",
+    "required_error": "Nume utilizator și parolă necesare",
+    "host_shell_disabled": "Shell-ul gazdă dezactivat",
+    "docker_not_found": "Container Docker '{container}' negăsit",
+    "lxc_not_found": "Container LXC '{container}' negăsit",
+    "container_not_found": "Container '{container}' negăsit",
+    "no_container_specified": "Eroare: Niciun container specificat",
+    "terminal_create_failed": "Eroare: Creare terminal eșuată",
+    "terminal_init_failed": "Eroare: Inițializare terminal eșuată",
+    "no_shell_session": "Nicio sesiune shell activă",
+    "connected_lxc": "Conectat la LXC :: {container}",
+    "connected_docker": "Conectat la Docker :: {container}",
+    "container_terminal": "Terminal Container",
+    "no_container_running": "Niciun container în execuție",
+    "connected_to": "Conectat la "
+}

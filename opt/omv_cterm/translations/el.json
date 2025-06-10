@@ -1,0 +1,23 @@
+{
+    "login_title": "Σύνδεση Τερματικού",
+    "username": "Όνομα χρήστη",
+    "password": "Κωδικός",
+    "logout": "Αποσύνδεση",
+    "login_button": "Σύνδεση",
+    "auth_error": "Αποτυχία πιστοποίησης",
+    "group_error": "Πρέπει να είστε στην ομάδα {group}",
+    "required_error": "Απαιτείται όνομα χρήστη και κωδικός",
+    "host_shell_disabled": "Κελύφους κεντρικού απενεργοποιημένο",
+    "docker_not_found": "Δεν βρέθηκε Docker container '{container}'",
+    "lxc_not_found": "Δεν βρέθηκε LXC container '{container}'",
+    "container_not_found": "Δεν βρέθηκε container '{container}'",
+    "no_container_specified": "Σφάλμα: Δεν καθορίστηκε container",
+    "terminal_create_failed": "Σφάλμα: Αποτυχία δημιουργίας τερματικού",
+    "terminal_init_failed": "Σφάλμα: Αποτυχία προετοιμασίας τερματικού",
+    "no_shell_session": "Δεν υπάρχει ενεργό shell session",
+    "connected_lxc": "Συνδέθηκε στο LXC :: {container}",
+    "connected_docker": "Συνδέθηκε στο Docker :: {container}",
+    "container_terminal": "Τερματικό Container",
+    "no_container_running": "Δεν υπάρχουν ενεργά containers",
+    "connected_to": "Συνδέθηκε στο "
+}

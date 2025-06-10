@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminál Bejelentkezés",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "logout": "Kijelentkezés",
+    "login_button": "Bejelentkezés",
+    "auth_error": "Hitelesítés sikertelen",
+    "group_error": "A {group} csoport tagja kell legyen",
+    "required_error": "Felhasználónév és jelszó szükséges",
+    "host_shell_disabled": "Gazda shell letiltva",
+    "docker_not_found": "Docker konténer '{container}' nem található",
+    "lxc_not_found": "LXC konténer '{container}' nem található",
+    "container_not_found": "Konténer '{container}' nem található",
+    "no_container_specified": "Hiba: Nincs megadva konténer",
+    "terminal_create_failed": "Hiba: A terminál létrehozása sikertelen",
+    "terminal_init_failed": "Hiba: A terminál inicializálása sikertelen",
+    "no_shell_session": "Nincs aktív shell munkamenet",
+    "connected_lxc": "Csatlakozva az LXC-hez :: {container}",
+    "connected_docker": "Csatlakozva a Dockerhez :: {container}",
+    "container_terminal": "Konténer Terminál",
+    "no_container_running": "Nincs futó konténer",
+    "connected_to": "Csatlakozva ehhez: "
+}

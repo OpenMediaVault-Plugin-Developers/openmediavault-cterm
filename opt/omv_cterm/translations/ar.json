@@ -1,0 +1,23 @@
+{
+    "login_title": "تسجيل الدخول إلى الطرفية",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "logout": "تسجيل الخروج",
+    "login_button": "تسجيل الدخول",
+    "auth_error": "فشل المصادقة",
+    "group_error": "يجب أن تكون في مجموعة {group}",
+    "required_error": "اسم المستخدم وكلمة المرور مطلوبان",
+    "host_shell_disabled": "صدفة المضيف معطلة",
+    "docker_not_found": "حاوية Docker '{container}' غير موجودة",
+    "lxc_not_found": "حاوية LXC '{container}' غير موجودة",
+    "container_not_found": "الحاوية '{container}' غير موجودة",
+    "no_container_specified": "خطأ: لم يتم تحديد حاوية",
+    "terminal_create_failed": "خطأ: فشل إنشاء الطرفية",
+    "terminal_init_failed": "خطأ: فشل تهيئة الطرفية",
+    "no_shell_session": "لا توجد جلسة صدفة نشطة",
+    "connected_lxc": "متصل بـ LXC :: {container}",
+    "connected_docker": "متصل بـ Docker :: {container}",
+    "container_terminal": "طرفية الحاوية",
+    "no_container_running": "لا توجد حاويات قيد التشغيل",
+    "connected_to": "متصل بـ "
+}

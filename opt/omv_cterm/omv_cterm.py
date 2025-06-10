@@ -39,7 +39,7 @@ DEFAULT_PORT = 5000
 ALLOWED_GROUP = "cterm"
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 TRANSLATIONS_DIR = Path(__file__).parent / 'translations'
-SUPPORTED_LANGUAGES = ['en', 'pl', 'de', 'fr', 'es', 'it', 'ru']  # Add more as needed
+SUPPORTED_LANGUAGES = ['en', 'pl', 'de', 'fr', 'es', 'it', 'ru','pt', 'nl', 'uk', 'sv', 'fi', 'no', 'da','cs', 'hu', 'ro', 'sk', 'bg', 'el', 'hr','ja', 'zh', 'ar', 'tr', 'ko']
 DEFAULT_LANGUAGE = 'en'
 
 # Setup logging
@@ -154,7 +154,26 @@ def inject_translations():
         'fr': 'Français',
         'es': 'Español',
         'it': 'Italiano',
-        'ru': 'Русский'
+        'ru': 'Русский',
+        'pt': 'Português',
+        'nl': 'Nederlands',
+        'uk': 'Українська',
+        'sv': 'Svenska',
+        'fi': 'Suomi',
+        'no': 'Norsk',
+        'da': 'Dansk',
+        'cs': 'Čeština',
+        'hu': 'Magyar',
+        'ro': 'Română',
+        'sk': 'Slovenčina',
+        'bg': 'Български',
+        'el': 'Ελληνικά',
+        'hr': 'Hrvatski',
+        'ja': '日本語',
+        'zh': '中文',
+        'ar': 'العربية',
+        'tr': 'Türkçe',
+        'ko': '한국어'
     }
     return {
         '_': lambda x: translations.get(lang, {}).get(x, x),

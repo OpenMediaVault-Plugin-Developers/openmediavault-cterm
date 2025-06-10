@@ -1,0 +1,23 @@
+{
+    "login_title": "Вход в Терминал",
+    "username": "Потребителско име",
+    "password": "Парола",
+    "logout": "Изход",
+    "login_button": "Вход",
+    "auth_error": "Удостоверяването неуспешно",
+    "group_error": "Трябва да сте в група {group}",
+    "required_error": "Изисква се потребителско име и парола",
+    "host_shell_disabled": "Шел на хост деактивиран",
+    "docker_not_found": "Docker контейнер '{container}' не е намерен",
+    "lxc_not_found": "LXC контейнер '{container}' не е намерен",
+    "container_not_found": "Контейнер '{container}' не е намерен",
+    "no_container_specified": "Грешка: Не е указан контейнер",
+    "terminal_create_failed": "Грешка: Неуспешно създаване на терминал",
+    "terminal_init_failed": "Грешка: Неуспешна инициализация на терминал",
+    "no_shell_session": "Няма активна шел сесия",
+    "connected_lxc": "Свързан с LXC :: {container}",
+    "connected_docker": "Свързан с Docker :: {container}",
+    "container_terminal": "Терминал на Контейнер",
+    "no_container_running": "Няма работещи контейнери",
+    "connected_to": "Свързан с "
+}

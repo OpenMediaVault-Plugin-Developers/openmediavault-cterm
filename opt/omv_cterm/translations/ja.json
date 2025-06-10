@@ -1,0 +1,23 @@
+{
+    "login_title": "ターミナルログイン",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "logout": "ログアウト",
+    "login_button": "ログイン",
+    "auth_error": "認証に失敗しました",
+    "group_error": "{group} グループに所属する必要があります",
+    "required_error": "ユーザー名とパスワードが必要です",
+    "host_shell_disabled": "ホストシェルは無効です",
+    "docker_not_found": "Dockerコンテナ '{container}' が見つかりません",
+    "lxc_not_found": "LXCコンテナ '{container}' が見つかりません",
+    "container_not_found": "コンテナ '{container}' が見つかりません",
+    "no_container_specified": "エラー: コンテナが指定されていません",
+    "terminal_create_failed": "エラー: ターミナルの作成に失敗しました",
+    "terminal_init_failed": "エラー: ターミナルの初期化に失敗しました",
+    "no_shell_session": "アクティブなシェルセッションがありません",
+    "connected_lxc": "LXCに接続しました :: {container}",
+    "connected_docker": "Dockerに接続しました :: {container}",
+    "container_terminal": "コンテナターミナル",
+    "no_container_running": "実行中のコンテナがありません",
+    "connected_to": "接続先: "
+}

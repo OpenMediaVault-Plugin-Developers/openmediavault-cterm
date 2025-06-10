@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminal Inloggning",
+    "username": "Användarnamn",
+    "password": "Lösenord",
+    "logout": "Logga ut",
+    "login_button": "Logga in",
+    "auth_error": "Autentisering misslyckades",
+    "group_error": "Måste vara i gruppen {group}",
+    "required_error": "Användarnamn och lösenord krävs",
+    "host_shell_disabled": "Värdterminal inaktiverad",
+    "docker_not_found": "Docker container '{container}' hittades inte",
+    "lxc_not_found": "LXC container '{container}' hittades inte",
+    "container_not_found": "Container '{container}' hittades inte",
+    "no_container_specified": "Fel: Ingen container angiven",
+    "terminal_create_failed": "Fel: Misslyckades skapa terminal",
+    "terminal_init_failed": "Fel: Misslyckades initiera terminal",
+    "no_shell_session": "Ingen aktiv shell-session",
+    "connected_lxc": "Ansluten till LXC :: {container}",
+    "connected_docker": "Ansluten till Docker :: {container}",
+    "container_terminal": "Container Terminal",
+    "no_container_running": "Inga containrar körs",
+    "connected_to": "Ansluten till "
+}

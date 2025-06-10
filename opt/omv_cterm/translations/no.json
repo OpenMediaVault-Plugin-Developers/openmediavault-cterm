@@ -1,0 +1,23 @@
+{
+    "login_title": "Terminal Innlogging",
+    "username": "Brukernavn",
+    "password": "Passord",
+    "logout": "Logg ut",
+    "login_button": "Logg inn",
+    "auth_error": "Autentisering feilet",
+    "group_error": "Må være i gruppen {group}",
+    "required_error": "Brukernavn og passord kreves",
+    "host_shell_disabled": "Vertsshell deaktivert",
+    "docker_not_found": "Docker container '{container}' ikke funnet",
+    "lxc_not_found": "LXC container '{container}' ikke funnet",
+    "container_not_found": "Container '{container}' ikke funnet",
+    "no_container_specified": "Feil: Ingen container spesifisert",
+    "terminal_create_failed": "Feil: Kunne ikke opprette terminal",
+    "terminal_init_failed": "Feil: Kunne ikke initialisere terminal",
+    "no_shell_session": "Ingen aktiv shell-økt",
+    "connected_lxc": "Tilkoblet LXC :: {container}",
+    "connected_docker": "Tilkoblet Docker :: {container}",
+    "container_terminal": "Container Terminal",
+    "no_container_running": "Ingen containere i drift",
+    "connected_to": "Tilkoblet "
+}

@@ -1,0 +1,23 @@
+{
+    "login_title": "Přihlášení do Terminálu",
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "logout": "Odhlásit se",
+    "login_button": "Přihlásit se",
+    "auth_error": "Autentizace selhala",
+    "group_error": "Musíte být ve skupině {group}",
+    "required_error": "Vyžadováno uživatelské jméno a heslo",
+    "host_shell_disabled": "Hostitelský shell zakázán",
+    "docker_not_found": "Docker kontejner '{container}' nenalezen",
+    "lxc_not_found": "LXC kontejner '{container}' nenalezen",
+    "container_not_found": "Kontejner '{container}' nenalezen",
+    "no_container_specified": "Chyba: Není specifikován kontejner",
+    "terminal_create_failed": "Chyba: Nepodařilo se vytvořit terminál",
+    "terminal_init_failed": "Chyba: Nepodařilo se inicializovat terminál",
+    "no_shell_session": "Žádná aktivní shell relace",
+    "connected_lxc": "Připojeno k LXC :: {container}",
+    "connected_docker": "Připojeno k Docker :: {container}",
+    "container_terminal": "Kontejnerový Terminál",
+    "no_container_running": "Žádné běžící kontejnery",
+    "connected_to": "Připojeno k "
+}

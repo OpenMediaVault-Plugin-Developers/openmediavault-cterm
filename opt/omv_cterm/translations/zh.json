@@ -1,0 +1,23 @@
+{
+    "login_title": "终端登录",
+    "username": "用户名",
+    "password": "密码",
+    "logout": "退出",
+    "login_button": "登录",
+    "auth_error": "认证失败",
+    "group_error": "必须在 {group} 组中",
+    "required_error": "需要用户名和密码",
+    "host_shell_disabled": "主机Shell已禁用",
+    "docker_not_found": "未找到Docker容器 '{container}'",
+    "lxc_not_found": "未找到LXC容器 '{container}'",
+    "container_not_found": "未找到容器 '{container}'",
+    "no_container_specified": "错误：未指定容器",
+    "terminal_create_failed": "错误：创建终端失败",
+    "terminal_init_failed": "错误：初始化终端失败",
+    "no_shell_session": "没有活动的Shell会话",
+    "connected_lxc": "已连接到LXC :: {container}",
+    "connected_docker": "已连接到Docker :: {container}",
+    "container_terminal": "容器终端",
+    "no_container_running": "没有运行的容器",
+    "connected_to": "已连接到"
+}
