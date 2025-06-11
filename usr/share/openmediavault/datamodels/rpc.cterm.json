@@ -24,6 +24,10 @@
         "autosecret": {
           "type": "string",
           "required": true
+        },
+        "autouser": {
+          "type": "string",
+          "required": true
         }
       }
     }

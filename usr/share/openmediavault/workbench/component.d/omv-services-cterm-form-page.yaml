@@ -39,7 +39,12 @@ data:
         name: autosecret
         label: _("Auto-login secret")
         value: ""
-        hint: _("Set to blank to disable auto-login")
+        hint: _("Leave blank to disable auto-login.")
+      - type: textInput
+        name: autouser
+        label: _("Auto-login user")
+        value: ""
+        hint: _("Override auto-login user. Leave blank to use web interface user.")
       - type: hidden
         name: ssl
         value: ""

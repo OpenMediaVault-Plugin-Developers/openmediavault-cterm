@@ -38,9 +38,10 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $object = $db->get("conf.service.cterm");
         $webadmin = $db->get("conf.webadmin");
         $object->add("ssl", "string", boolval($webadmin->get("enablessl")) ? "https" : "");
-        $object->add("omvuser", "string", $context['username']);
+        $autouser = $object->get('autouser') ?: $context['username'];
+        $object->add("omvuser", "string", $autouser);
         $secret = trim(file_get_contents('/etc/omv_cterm.secret'));
-        $hmac = hash_hmac('sha256', $context['username'], $secret);
+        $hmac = hash_hmac('sha256', $autouser, $secret);
         $object->add("hmac", "string", $hmac);
         // Return the configuration object.
         return $object->getAssoc();

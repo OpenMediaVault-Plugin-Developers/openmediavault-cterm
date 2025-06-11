@@ -26,6 +26,10 @@
     "autosecret": {
       "type": "string",
       "default": ""
+    },
+    "autouser": {
+      "type": "string",
+      "default": ""
     }
   }
 }
