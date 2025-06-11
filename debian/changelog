@@ -1,3 +1,9 @@
+openmediavault-cterm (7.8) UNRELEASED; urgency=medium
+
+  * Add auto-login
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 10 Jun 2025 18:36:07 -0500
+
 openmediavault-cterm (7.7.1) stable; urgency=low
 
   * Add more languages
