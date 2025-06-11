@@ -38,6 +38,10 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $object = $db->get("conf.service.cterm");
         $webadmin = $db->get("conf.webadmin");
         $object->add("ssl", "string", boolval($webadmin->get("enablessl")) ? "https" : "");
+        $object->add("omvuser", "string", $context['username']);
+        $secret = trim(file_get_contents('/etc/omv_cterm.secret'));
+        $hmac = hash_hmac('sha256', $context['username'], $secret);
+        $object->add("hmac", "string", $hmac);
         // Return the configuration object.
         return $object->getAssoc();
     }
@@ -46,7 +50,8 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        unset($params["ssl"]);
+        // remove unneeded params
+        unset($params["ssl"], $params["omvuser"], $params["hmac"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
         $db = \OMV\Config\Database::getInstance();

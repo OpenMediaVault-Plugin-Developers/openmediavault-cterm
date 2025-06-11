@@ -28,6 +28,7 @@ if ! omv_config_exists "/config/services/cterm"; then
   omv_config_add_key "/config/services/cterm" "host" "0.0.0.0"
   omv_config_add_key "/config/services/cterm" "port" "5000"
   omv_config_add_key "/config/services/cterm" "hostshell" "0"
+  omv_config_add_key "/config/services/cterm" "autosecret" ""
 fi
 
 exit 0

@@ -35,8 +35,19 @@ data:
           max: 65536
           patternType: integer
         hint: _("Port to listen on.")
+      - type: passwordInput
+        name: autosecret
+        label: _("Auto-login secret")
+        value: ""
+        hint: _("Set to blank to disable auto-login")
       - type: hidden
         name: ssl
+        value: ""
+      - type: hidden
+        name: omvuser
+        value: ""
+      - type: hidden
+        name: hmac
         value: ""
     buttons:
       - text: _("Open UI")
@@ -46,7 +57,7 @@ data:
             prop: "enable"
         execute:
           type: url
-          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port] | join | encodeuricomponent }}"
+          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, '/?user=', omvuser, '&hmac=', hmac] | join | encodeuricomponent }}"
       - template: submit
       - template: cancel
         execute:

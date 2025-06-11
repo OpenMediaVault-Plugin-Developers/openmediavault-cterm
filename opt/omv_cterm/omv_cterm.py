@@ -6,7 +6,7 @@
 # License version 2. This program is licensed "as is" without any
 # warranty of any kind, whether express or implied.
 #
-# version: 2.0.0
+# version: 2.1.0
 
 import os
 import sys
@@ -15,6 +15,7 @@ import logging
 import threading
 import subprocess
 import shutil
+import hmac, hashlib
 import pwd
 import grp
 import pty
@@ -209,6 +210,38 @@ def handle_sigterm(signum, frame):
     sys.exit(0)
 
 signal.signal(signal.SIGTERM, handle_sigterm)
+
+def get_shared_secret() -> str:
+    try:
+        with open("/etc/omv_cterm.secret") as f:
+            return f.read().strip()
+    except Exception as e:
+        logger.error(f"Failed to read shared secret: {e}")
+        return ""
+
+@app.before_request
+def auto_login_via_hmac():
+    if session.get("username"):
+        return
+
+    user = request.args.get("user")
+    hmac_val = request.args.get("hmac")
+    if not user or not hmac_val:
+        return
+
+    secret = get_shared_secret()
+    if not secret:
+        return
+
+    expected_hmac = hmac.new(secret.encode(), user.encode(), hashlib.sha256).hexdigest()
+    if hmac.compare_digest(expected_hmac, hmac_val):
+        if is_user_in_group(user, ALLOWED_GROUP):
+            session["username"] = user
+            logger.info(f"Auto-logged in via HMAC redirect: {user}")
+        else:
+            logger.warning(f"HMAC valid but user {user} not in group {ALLOWED_GROUP}")
+    else:
+        logger.warning(f"Invalid HMAC for user {user}")
 
 def is_user_in_group(username: str, groupname: str) -> bool:
     """Check if user is in specified group"""

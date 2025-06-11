@@ -14,7 +14,15 @@ configure_cterm:
         webadmin: {{ webadmin | json }}
     - user: root
     - group: root
-    - mode: 644
+    - mode: '644'
+
+configure_cterm_secret:
+  file.managed:
+    - name: "/etc/omv_cterm.secret"
+    - contents: "{{ config.autosecret }}"
+    - user: root
+    - group: root
+    - mode: '0600'
 
 configure_cterm_unit:
   file.managed:
@@ -27,7 +35,7 @@ configure_cterm_unit:
         webadmin: {{ webadmin | json }}
     - user: root
     - group: root
-    - mode: 644
+    - mode: '644'
 
 systemd_daemon_reload_cterm:
   cmd.run:
@@ -43,6 +51,7 @@ start_cterm_service:
     - watch:
       - file: configure_cterm
       - file: configure_cterm_unit
+      - file: configure_cterm_secret
 
 {% else %}
 

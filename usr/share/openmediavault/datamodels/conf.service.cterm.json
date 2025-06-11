@@ -22,6 +22,10 @@
     },
     "hostshell": {
       "type": "boolean"
+    },
+    "autosecret": {
+      "type": "string",
+      "default": ""
     }
   }
 }
