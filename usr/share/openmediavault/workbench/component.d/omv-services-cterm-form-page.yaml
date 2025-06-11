@@ -44,7 +44,7 @@ data:
         name: autouser
         label: _("Auto-login user")
         value: ""
-        hint: _("Override auto-login user. Leave blank to use web interface user.")
+        hint: _("Override auto-login user for admins.<br/>Leave blank to use web interface user.<br/>Non-admins will always use web interface user.")
       - type: hidden
         name: ssl
         value: ""
