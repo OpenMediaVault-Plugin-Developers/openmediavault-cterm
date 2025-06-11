@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 06:00-0500\n"
+"POT-Creation-Date: 2025-06-11 08:55-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
 "Language-Team: Estonian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/et/)\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Auto-login secret"
+msgstr ""
+
+msgid "Auto-login user"
 msgstr ""
 
 msgid "CTerm"
@@ -41,6 +44,9 @@ msgstr ""
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr ""
 
+msgid "Leave blank to disable auto-login."
+msgstr ""
+
 msgid "Level"
 msgstr ""
 
@@ -53,13 +59,15 @@ msgstr ""
 msgid "Open UI"
 msgstr ""
 
+msgid ""
+"Override auto-login user for admins.<br/>Leave blank to use web interface "
+"user.<br/>Non-admins will always use web interface user."
+msgstr ""
+
 msgid "Port"
 msgstr ""
 
 msgid "Port to listen on."
-msgstr ""
-
-msgid "Set to blank to disable auto-login"
 msgstr ""
 
 msgid "Updated cterm settings."
