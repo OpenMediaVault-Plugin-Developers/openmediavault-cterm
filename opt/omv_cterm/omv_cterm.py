@@ -24,6 +24,8 @@ import struct
 import termios
 import tty
 import json
+import secrets
+import time
 from typing import Dict, Tuple, Optional, List, Any
 from pathlib import Path
 
@@ -33,6 +35,7 @@ import configparser
 import PAM
 from dataclasses import dataclass
 from urllib.parse import urlencode
+from typing import Optional
 
 # Constants
 CONFIG_FILE = "/etc/omv_cterm.conf"
@@ -43,6 +46,11 @@ LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 TRANSLATIONS_DIR = Path(__file__).parent / 'translations'
 SUPPORTED_LANGUAGES = ['en', 'pl', 'de', 'fr', 'es', 'it', 'ru','pt', 'nl', 'uk', 'sv', 'fi', 'no', 'da','cs', 'hu', 'ro', 'sk', 'bg', 'el', 'hr','ja', 'zh', 'ar', 'tr', 'ko']
 DEFAULT_LANGUAGE = 'en'
+
+# Hmac secure
+MIN_SECRET_LENGTH = 32
+HMAC_VALIDITY = 60
+MAX_USERNAME_LENGTH = 32
 
 # Setup logging
 logging.basicConfig(
@@ -213,40 +221,95 @@ def handle_sigterm(signum, frame):
 signal.signal(signal.SIGTERM, handle_sigterm)
 
 def get_shared_secret() -> str:
+    """Download and verify HMAC secret from file"""
+    secret_file = "/etc/omv_cterm.secret"
+
     try:
-        with open("/etc/omv_cterm.secret") as f:
-            return f.read().strip()
+        if os.stat(secret_file).st_mode & 0o077 != 0:
+            logger.error(f"Insecure permissions on {secret_file}, must be 600")
+            return ""
+        with open(secret_file, "rb") as f:
+            secret = f.read().strip()
+
+            if len(secret) < MIN_SECRET_LENGTH:
+                logger.error(f"Secret too short, must be at least {MIN_SECRET_LENGTH} bytes")
+                return ""
+
+            return secret.decode('utf-8')
+    except FileNotFoundError:
+        logger.error("HMAC secret file not found")
+        return ""
     except Exception as e:
         logger.error(f"Failed to read shared secret: {e}")
         return ""
+
+def validate_username(username: str) -> bool:
+    """Check if username is correct"""
+    if not username or len(username) > MAX_USERNAME_LENGTH:
+        return False
+
+    if not all(c.isalnum() or c in '.-_' for c in username):
+        return False
+
+    return True
+
+def generate_hmac_token(username: str, timestamp: Optional[float] = None) -> str:
+    """Generate HMAC token with timestamp"""
+    if not timestamp:
+        timestamp = time.time()
+
+    secret = get_shared_secret()
+    if not secret:
+        return ""
+
+    message = f"{username}:{timestamp}"
+    return hmac.new(secret.encode(), message.encode(), hashlib.sha256).hexdigest()
 
 @app.before_request
 def auto_login_via_hmac():
     if session.get("username"):
         return
 
-    user = request.args.get("user")
-    hmac_val = request.args.get("hmac")
-    if not user or not hmac_val:
+    user = request.args.get("user", "")
+    hmac_val = request.args.get("hmac", "")
+    timestamp = request.args.get("timestamp", "")
+
+    if not all([user, hmac_val, timestamp]):
         return
 
-    secret = get_shared_secret()
-    if not secret:
+    try:
+        timestamp = float(timestamp)
+    except ValueError:
+        logger.warning("Invalid timestamp in HMAC auth")
         return
 
-    expected_hmac = hmac.new(secret.encode(), user.encode(), hashlib.sha256).hexdigest()
-    if hmac.compare_digest(expected_hmac, hmac_val):
-        if is_user_in_group(user, ALLOWED_GROUP):
-            session["username"] = user
-            logger.info(f"Auto-logged in via HMAC redirect: {user}")
-            clean_args = {k: v for k, v in request.args.items()
-                          if k not in ("user", "hmac")}
-            return redirect(request.path
-                            + ("?"+urlencode(clean_args) if clean_args else ""))
-        else:
-            logger.warning(f"HMAC valid but user {user} not in group {ALLOWED_GROUP}")
-    else:
+    if abs(time.time() - timestamp) > HMAC_VALIDITY:
+        logger.warning(f"Expired HMAC token for user {user}")
+        return
+
+    if not validate_username(user):
+        logger.warning(f"Invalid username in HMAC auth: {user}")
+        return
+
+    expected_hmac = generate_hmac_token(user, timestamp)
+    if not expected_hmac:
+        return
+
+    if not hmac.compare_digest(expected_hmac, hmac_val):
         logger.warning(f"Invalid HMAC for user {user}")
+        return
+
+    if not is_user_in_group(user, ALLOWED_GROUP):
+        logger.warning(f"HMAC valid but user {user} not in group {ALLOWED_GROUP}")
+        return
+
+    session["username"] = user
+    logger.info(f"Auto-logged in via HMAC redirect: {user}")
+
+    clean_args = {k: v for k, v in request.args.items()
+                  if k not in ("user", "hmac", "timestamp")}
+    return redirect(request.path
+                    + ("?"+urlencode(clean_args) if clean_args else ""))
 
 def is_user_in_group(username: str, groupname: str) -> bool:
     """Check if user is in specified group"""
