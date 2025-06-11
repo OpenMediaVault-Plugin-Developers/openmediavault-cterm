@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 08:55-0500\n"
+"POT-Creation-Date: 2025-06-11 17:08-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
 "Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
@@ -48,9 +48,6 @@ msgstr "Shell host"
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr "IP su cui ascoltare. Utilizza 0.0.0.0 per tutti gli IP."
 
-msgid "Leave blank to disable auto-login."
-msgstr "Lascia vuoto per disattivare l'accesso automatico."
-
 msgid "Level"
 msgstr "Livello"
 
@@ -73,6 +70,11 @@ msgstr "Porta"
 
 msgid "Port to listen on."
 msgstr "Porta su cui ascoltare."
+
+msgid ""
+"Should be between 32 and 64 characters.<br/>Leave blank to disable auto-"
+"login."
+msgstr ""
 
 msgid "Updated cterm settings."
 msgstr "Le impostazioni di cterm sono state aggiornate."

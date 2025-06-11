@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-cterm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Valentin Korenjak <valentin@korenjak.si>, 2025
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 08:55-0500\n"
+"POT-Creation-Date: 2025-06-11 17:08-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
+"Last-Translator: Valentin Korenjak <valentin@korenjak.si>, 2025\n"
 "Language-Team: Slovenian (Slovenia) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,60 +22,66 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 msgid "Auto-login secret"
-msgstr ""
+msgstr "Skrivnost za samodejno prijavo"
 
 msgid "Auto-login user"
-msgstr ""
+msgstr "Uporabnik za samodejno prijavo"
 
 msgid "CTerm"
-msgstr ""
+msgstr "CTerm"
 
 msgid "Date & Time"
-msgstr ""
+msgstr "Datum in ura"
 
 msgid "Enable"
-msgstr ""
+msgstr "Omogoči"
 
 msgid "Enable host shell option in container list."
-msgstr ""
+msgstr "Omogočite možnost lupine gostitelja v seznamu vsebnikov."
 
 msgid "Host"
-msgstr ""
+msgstr "Gostitelj"
 
 msgid "Host shell"
-msgstr ""
+msgstr "Lupina gostitelja"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
-msgstr ""
-
-msgid "Leave blank to disable auto-login."
-msgstr ""
+msgstr "IP za poslušanje. Za vse IP-je uporabite 0.0.0.0."
 
 msgid "Level"
-msgstr ""
+msgstr "Nivo"
 
 msgid "Message"
-msgstr ""
+msgstr "Sporočilo"
 
 msgid "Module"
-msgstr ""
+msgstr "Modul"
 
 msgid "Open UI"
-msgstr ""
+msgstr "Odpri UV"
 
 msgid ""
 "Override auto-login user for admins.<br/>Leave blank to use web interface "
 "user.<br/>Non-admins will always use web interface user."
 msgstr ""
+"Nadomeščanje uporabnika za samodejno prijavo za administratorja.<br/>Pustite"
+" prazno, če želite uporabiti uporabnika spletnega "
+"vmesnika.<br/>Neadministratorji bodo vedno uporabili uporabnika spletnega "
+"vmesnika."
 
 msgid "Port"
-msgstr ""
+msgstr "Vrata"
 
 msgid "Port to listen on."
+msgstr "Vrata za poslušanje."
+
+msgid ""
+"Should be between 32 and 64 characters.<br/>Leave blank to disable auto-"
+"login."
 msgstr ""
 
 msgid "Updated cterm settings."
-msgstr ""
+msgstr "Posodobljene nastavitve cterma."
 
 msgid "User must be in cterm group to login."
-msgstr ""
+msgstr "Uporabnik mora biti v skupini cterm, da se lahko prijavi."
