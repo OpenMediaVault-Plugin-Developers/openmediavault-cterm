@@ -32,6 +32,7 @@ from flask_socketio import SocketIO, emit
 import configparser
 import PAM
 from dataclasses import dataclass
+from urllib.parse import urlencode
 
 # Constants
 CONFIG_FILE = "/etc/omv_cterm.conf"
@@ -238,6 +239,10 @@ def auto_login_via_hmac():
         if is_user_in_group(user, ALLOWED_GROUP):
             session["username"] = user
             logger.info(f"Auto-logged in via HMAC redirect: {user}")
+            clean_args = {k: v for k, v in request.args.items()
+                          if k not in ("user", "hmac")}
+            return redirect(request.path
+                            + ("?"+urlencode(clean_args) if clean_args else ""))
         else:
             logger.warning(f"HMAC valid but user {user} not in group {ALLOWED_GROUP}")
     else:
