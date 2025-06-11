@@ -39,11 +39,17 @@ data:
         name: autosecret
         label: _("Auto-login secret")
         value: ""
-        hint: _("Leave blank to disable auto-login.")
+        hint: _("Should be between 32 and 64 characters.<br/>Leave blank to disable auto-login.")
+        validators:
+          minLength: 0
+          maxLength: 64
       - type: textInput
         name: autouser
         label: _("Auto-login user")
         value: ""
+        validators:
+          minLength: 0
+          maxLength: 32
         hint: _("Override auto-login user for admins.<br/>Leave blank to use web interface user.<br/>Non-admins will always use web interface user.")
       - type: hidden
         name: ssl

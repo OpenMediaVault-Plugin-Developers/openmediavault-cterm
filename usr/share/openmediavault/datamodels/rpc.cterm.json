@@ -23,6 +23,17 @@
         },
         "autosecret": {
           "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 64
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
           "required": true
         },
         "autouser": {
