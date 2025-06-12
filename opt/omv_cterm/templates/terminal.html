@@ -108,7 +108,9 @@
             setTimeout(fitAndSync, 0);
             window.addEventListener('resize', debounce(fitAndSync, 100));
 
-            const socket = io();
+            const socket = io({ 
+                    path :'{{ basepath_io }}'
+                 });
             const container = "{{ container }}";
             const containerType = "{{ container_type or 'docker' }}";
 
