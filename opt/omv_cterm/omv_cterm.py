@@ -745,7 +745,7 @@ def on_close_terminal(data: Dict[str, Any]):
 
 if __name__ == '__main__':
     try:
-        logger.info(f"Starting server on {config.host}:{config.port}")
+        logger.info(f"Starting server on {config.host}:{config.port}{config.basepath}")
 
         run_kwargs = {
             'host': config.host,

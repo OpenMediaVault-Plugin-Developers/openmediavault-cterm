@@ -4,6 +4,7 @@
 [server]
 host = {{ config.host }}
 port = {{ config.port }}
+basepath = {{ config.basepath }}
 use_https = {{ 'True' if webadmin.enablessl | to_bool else 'False' }}
 ssl_cert = {{ ssl_cert_dir | path_join('certs', ssl_cert_prefix ~ webadmin.sslcertificateref ~ '.crt') }}
 ssl_key = {{ ssl_cert_dir | path_join('private', ssl_cert_prefix ~ webadmin.sslcertificateref ~ '.key') }}
