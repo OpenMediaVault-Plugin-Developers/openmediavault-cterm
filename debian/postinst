@@ -30,15 +30,6 @@ case "$1" in
             # restart service
             systemctl restart "${term}"
         fi
-
-        SECRET_FILE="/etc/omv_cterm.secret"
-        if [ ! -f "$SECRET_FILE" ]; then
-            head -c 64 /dev/urandom | base64 > "$SECRET_FILE"
-            chmod 600 "$SECRET_FILE"
-            echo "Generated new secret in $SECRET_FILE"
-        else
-            echo "Secret file already exists"
-        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
