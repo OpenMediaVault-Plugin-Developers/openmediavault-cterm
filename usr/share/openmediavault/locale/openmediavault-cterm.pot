@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 17:08-0500\n"
+"POT-Creation-Date: 2025-06-12 15:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,16 @@ msgstr ""
 msgid "Auto-login secret"
 msgstr ""
 
+msgid "Auto-login secret is too short.  Must be at least 32 characters or disabled with 0 characters."
+msgstr ""
+
 msgid "Auto-login user"
+msgstr ""
+
+msgid "Base path"
+msgstr ""
+
+msgid "Base path to use. Leave blank to disable."
 msgstr ""
 
 msgid "CTerm"
