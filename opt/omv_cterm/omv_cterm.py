@@ -96,10 +96,17 @@ def load_config() -> ServerConfig:
     srv = cfg["server"]
 
     try:
+        basepath = srv.get("basepath", "/").strip()
+        if not basepath or basepath == "/":
+            basepath = ""
+        else:
+            # Make sure the basepath starts with / and does not end with /
+            basepath = f"/{basepath.strip('/')}"
+
         return ServerConfig(
             host=srv.get("host", DEFAULT_HOST),
             port=srv.getint("port", DEFAULT_PORT),
-            basepath=srv.get("basepath", "").rstrip('/'),
+            basepath=basepath,
             use_https=srv.getboolean("use_https", False),
             ssl_cert=srv.get("ssl_cert") or None,
             ssl_key=srv.get("ssl_key") or None,
@@ -124,11 +131,14 @@ app.config["APPLICATION_ROOT"] = config.basepath
 for log_name in ['werkzeug', 'engineio', 'socketio']:
     logging.getLogger(log_name).setLevel(logging.WARNING)
 
+socketio_path_url = f"{config.basepath}/socket.io" if config.basepath != "/" else None
+
 socketio = SocketIO(
     app,
     async_mode='threading',
     logger=logger.getEffectiveLevel() <= logging.DEBUG,
-    engineio_logger=logger.getEffectiveLevel() <= logging.DEBUG
+    engineio_logger=logger.getEffectiveLevel() <= logging.DEBUG,
+    socketio_path=socketio_path_url
 )
 
 # Active shell sessions {sid: (master_fd, child_pid)}
@@ -193,6 +203,13 @@ def inject_translations():
         'available_languages': SUPPORTED_LANGUAGES,
         'current_language': lang,
         'language_names': language_names
+    }
+
+@app.context_processor
+def inject_base_url():
+    """Make base_url available in all templates"""
+    return {
+        'base_url': config.basepath if config.basepath != "/" else ""
     }
 
 @app.route('/set_language', methods=['POST'])
@@ -537,6 +554,7 @@ def terminal(container: str, container_type: Optional[str] = None):
             'terminal.html',
             container='__host__',
             container_type='host',
+            basepath_io=socketio_path_url,
             host_shell=config.host_shell
         )
 
@@ -559,6 +577,7 @@ def terminal(container: str, container_type: Optional[str] = None):
             'terminal.html',
             container=container,
             container_type=container_type,
+            basepath_io=socketio_path_url,
             host_shell=config.host_shell
         )
 
@@ -567,6 +586,7 @@ def terminal(container: str, container_type: Optional[str] = None):
             'terminal.html',
             container=container,
             container_type='docker',
+            basepath_io=socketio_path_url,
             host_shell=config.host_shell
         )
 
@@ -575,6 +595,7 @@ def terminal(container: str, container_type: Optional[str] = None):
             'terminal.html',
             container=container,
             container_type='lxc',
+            basepath_io=socketio_path_url,
             host_shell=config.host_shell
         )
 
@@ -795,12 +816,13 @@ def on_close_terminal(data: Dict[str, Any]):
 
 if __name__ == '__main__':
     try:
-        logger.info(f"Starting server on {config.host}:{config.port}{config.basepath}")
+        display_path = config.basepath if config.basepath else "/"
+        logger.info(f"Starting server on {config.host}:{config.port}{display_path}")
 
         run_kwargs = {
             'host': config.host,
             'port': config.port,
-            'allow_unsafe_werkzeug': True, # Only for development!
+            'allow_unsafe_werkzeug': True,  # Only for development!
             'log_output': False
         }
 
@@ -809,6 +831,15 @@ if __name__ == '__main__':
                 logger.error("SSL certificate or key file not found")
                 sys.exit(1)
             run_kwargs['ssl_context'] = (config.ssl_cert, config.ssl_key)
+
+        if config.basepath:
+            from werkzeug.middleware.dispatcher import DispatcherMiddleware
+            from werkzeug.wrappers import Response
+
+            app.wsgi_app = DispatcherMiddleware(
+                Response('Not Found', status=404),
+                {config.basepath: app.wsgi_app}
+            )
 
         socketio.run(app, **run_kwargs)
     except Exception as e:
