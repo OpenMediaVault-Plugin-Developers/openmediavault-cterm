@@ -14,4 +14,9 @@ if ! omv_config_exists "/config/services/cterm/autouser"; then
   omv_config_add_key "/config/services/cterm" "autouser" ""
 fi
 
+if ! omv_config_exists "/config/services/cterm/basepath"; then
+  omv_config_add_key "/config/services/cterm" "basepath" ""
+  omv_module_set_dirty cterm
+fi
+
 exit 0

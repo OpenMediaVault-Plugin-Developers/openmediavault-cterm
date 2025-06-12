@@ -35,6 +35,11 @@ data:
           max: 65536
           patternType: integer
         hint: _("Port to listen on.")
+      - type: textInput
+        name: basepath
+        label: _("Base path")
+        value: ""
+        hint: _("Base path to use. Leave blank to disable.")
       - type: passwordInput
         name: autosecret
         label: _("Auto-login secret")
@@ -68,7 +73,7 @@ data:
             prop: "enable"
         execute:
           type: url
-          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, '/?user=', omvuser, '&hmac=', hmac] | join | encodeuricomponent }}"
+          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac] | join | encodeuricomponent }}"
       - template: submit
       - template: cancel
         execute:
