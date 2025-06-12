@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 08:55-0500\n"
+"POT-Creation-Date: 2025-06-11 17:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,9 +44,6 @@ msgstr ""
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr ""
 
-msgid "Leave blank to disable auto-login."
-msgstr ""
-
 msgid "Level"
 msgstr ""
 
@@ -66,6 +63,9 @@ msgid "Port"
 msgstr ""
 
 msgid "Port to listen on."
+msgstr ""
+
+msgid "Should be between 32 and 64 characters.<br/>Leave blank to disable auto-login."
 msgstr ""
 
 msgid "Updated cterm settings."

@@ -23,9 +23,24 @@
         },
         "autosecret": {
           "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 64
+            },
+            {
+              "type": "string",
+              "maxLength": 0
+            }
+          ],
           "required": true
         },
         "autouser": {
+          "type": "string",
+          "required": true
+        },
+        "basepath": {
           "type": "string",
           "required": true
         }

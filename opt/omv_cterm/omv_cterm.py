@@ -6,7 +6,7 @@
 # License version 2. This program is licensed "as is" without any
 # warranty of any kind, whether express or implied.
 #
-# version: 2.1.0
+# version: 2.2.0
 
 import os
 import sys
@@ -67,6 +67,7 @@ logger = logging.getLogger(__name__)
 class ServerConfig:
     host: str
     port: int
+    basepath: str
     use_https: bool
     ssl_cert: Optional[str]
     ssl_key: Optional[str]
@@ -80,6 +81,7 @@ def load_config() -> ServerConfig:
     cfg["server"] = {
         "host": DEFAULT_HOST,
         "port": str(DEFAULT_PORT),
+        "basepath": "",
         "use_https": "false",
         "ssl_cert": "",
         "ssl_key": "",
@@ -97,6 +99,7 @@ def load_config() -> ServerConfig:
         return ServerConfig(
             host=srv.get("host", DEFAULT_HOST),
             port=srv.getint("port", DEFAULT_PORT),
+            basepath=srv.get("basepath", "").rstrip('/'),
             use_https=srv.getboolean("use_https", False),
             ssl_cert=srv.get("ssl_cert") or None,
             ssl_key=srv.get("ssl_key") or None,
@@ -115,6 +118,7 @@ app.secret_key = os.urandom(32)
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SECURE"] = config.use_https
 app.config["PERMANENT_SESSION_LIFETIME"] = 3600  # 1 hour
+app.config["APPLICATION_ROOT"] = config.basepath
 
 # Reduce logging for dependencies
 for log_name in ['werkzeug', 'engineio', 'socketio']:
@@ -791,7 +795,7 @@ def on_close_terminal(data: Dict[str, Any]):
 
 if __name__ == '__main__':
     try:
-        logger.info(f"Starting server on {config.host}:{config.port}")
+        logger.info(f"Starting server on {config.host}:{config.port}{config.basepath}")
 
         run_kwargs = {
             'host': config.host,
