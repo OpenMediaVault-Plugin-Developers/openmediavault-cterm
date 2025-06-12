@@ -65,6 +65,9 @@ data:
       - type: hidden
         name: hmac
         value: ""
+      - type: hidden
+        name: ts
+        value: ""
     buttons:
       - text: _("Open UI")
         enabledConstraint:
@@ -73,7 +76,7 @@ data:
             prop: "enable"
         execute:
           type: url
-          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac] | join | encodeuricomponent }}"
+          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}"
       - template: submit
       - template: cancel
         execute:

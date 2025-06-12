@@ -41,8 +41,11 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $autouser = $object->get('autouser') ?: $context['username'];
         $object->add("omvuser", "string", $autouser);
         $secret = trim(file_get_contents('/etc/omv_cterm.secret'));
-        $hmac = hash_hmac('sha256', $autouser, $secret);
+        $ts = sprintf('%s', microtime(true));
+        $userts = sprintf('%s:%s', $autouser, $ts);
+        $hmac = hash_hmac('sha256', $userts, $secret);
         $object->add("hmac", "string", $hmac);
+        $object->add("ts", "string", $ts);
         // Return the configuration object.
         return $object->getAssoc();
     }
