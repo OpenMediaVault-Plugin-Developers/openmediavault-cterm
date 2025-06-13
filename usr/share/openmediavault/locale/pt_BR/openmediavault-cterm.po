@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Jeann Cavalcante <wjeann@gmail.com>, 2025
+# Marcelo Esteves <marcelopge@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 17:08-0500\n"
+"POT-Creation-Date: 2025-06-12 20:18-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
-"Last-Translator: Jeann Cavalcante <wjeann@gmail.com>, 2025\n"
+"Last-Translator: Marcelo Esteves <marcelopge@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,10 +23,21 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Auto-login secret"
-msgstr "Auto-login secreto"
+msgstr "Autenticação do login automático"
+
+msgid ""
+"Auto-login secret is too short.  Must be at least 32 characters or disabled "
+"with 0 characters."
+msgstr ""
 
 msgid "Auto-login user"
-msgstr "Auto-login usuário"
+msgstr "Usuário do login automático"
+
+msgid "Base path"
+msgstr ""
+
+msgid "Base path to use. Leave blank to disable."
+msgstr ""
 
 msgid "CTerm"
 msgstr "CTerm"
@@ -47,6 +59,13 @@ msgstr "Host shell"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr "IP de acesso. Use 0.0.0.0 para todos IPs."
+
+msgid ""
+"Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
+"characters.<br/>Enter 'random' to generate a random string between 32 and 64"
+" chars.<br/>Enter 'random64' where the number 64 can be the length between "
+"32 and 64."
+msgstr ""
 
 msgid "Level"
 msgstr "Nível"
@@ -73,11 +92,6 @@ msgstr "Porta"
 
 msgid "Port to listen on."
 msgstr "Porta de acesso"
-
-msgid ""
-"Should be between 32 and 64 characters.<br/>Leave blank to disable auto-"
-"login."
-msgstr ""
 
 msgid "Updated cterm settings."
 msgstr "Atualizar configurações cterm"

@@ -36,13 +36,18 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.cterm");
+        // ssl
         $webadmin = $db->get("conf.webadmin");
         $object->add("ssl", "string", boolval($webadmin->get("enablessl")) ? "https" : "");
+        // auto-login
         $autouser = $object->get('autouser') ?: $context['username'];
-        $object->add("omvuser", "string", $autouser);
         $secret = trim(file_get_contents('/etc/omv_cterm.secret'));
-        $hmac = hash_hmac('sha256', $autouser, $secret);
+        $ts = sprintf('%s', microtime(true));
+        $userts = sprintf('%s:%s', $autouser, $ts);
+        $hmac = hash_hmac('sha256', $userts, $secret);
+        $object->add("omvuser", "string", $autouser);
         $object->add("hmac", "string", $hmac);
+        $object->add("ts", "string", $ts);
         // Return the configuration object.
         return $object->getAssoc();
     }
@@ -52,19 +57,50 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         // remove unneeded params
-        unset($params["ssl"], $params["omvuser"], $params["hmac"]);
+        unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
+        // generate secret if random or random## passed
+        $params["autosecret"] = $this->generateSecret($params["autosecret"]);
         $len = strlen($params["autosecret"]);
         if ($len > 0 && $len < 32) {
             $msg = gettext("Auto-login secret is too short.  Must be at least 32 characters or disabled with 0 characters.");
             throw new \OMV\Exception($msg);
         }
+        // cleanup basepath
+        $base = trim($params['basepath'] ?? '');
+        $base = trim($base, '/');
+        if ($base !== '') {
+            $base = '/'.$base;
+        }
+        $params['basepath'] = $base;
+        // update database
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.cterm");
         $object->setAssoc($params);
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    private function generateSecret($input)
+    {
+        $minLen = 32;
+        $maxLen = 64;
+
+        if (strcasecmp($input, 'random') === 0) {
+            $length = random_int($minLen, $maxLen);
+        } elseif (preg_match('/^random(\d+)$/i', $input, $matches)) {
+            $length = max($minLen, min((int)$matches[1], $maxLen));
+        } else {
+            return $input;
+        }
+
+        // Generate URL-safe random string
+        // We need more bytes since base64 encoding has overhead
+        $bytesNeeded = ceil($length * 4 / 3);
+        $urlSafeString = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode(random_bytes($bytesNeeded)));
+
+        return substr($urlSafeString, 0, $length);
     }
 }

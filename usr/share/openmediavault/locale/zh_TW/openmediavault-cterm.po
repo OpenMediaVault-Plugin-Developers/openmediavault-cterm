@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-cterm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# kochin <kochinc@outlook.com>, 2025
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 17:08-0500\n"
+"POT-Creation-Date: 2025-06-12 20:18-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,43 +22,61 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Auto-login secret"
-msgstr ""
+msgstr "自動登入密碼"
+
+msgid ""
+"Auto-login secret is too short.  Must be at least 32 characters or disabled "
+"with 0 characters."
+msgstr "自動登入的密碼太短。必須至少有 32 個字元，或以 0 個字元來停用。 "
 
 msgid "Auto-login user"
-msgstr ""
+msgstr "自動登入用户"
+
+msgid "Base path"
+msgstr "基底路徑"
+
+msgid "Base path to use. Leave blank to disable."
+msgstr "要使用的基底路徑。留空白表示停用。"
 
 msgid "CTerm"
-msgstr ""
+msgstr "CTerm"
 
 msgid "Date & Time"
-msgstr ""
+msgstr "日期與時間"
 
 msgid "Enable"
-msgstr ""
+msgstr "啟用"
 
 msgid "Enable host shell option in container list."
-msgstr ""
+msgstr "在容器列表中啟用主機指令殼選項。"
 
 msgid "Host"
-msgstr ""
+msgstr "主機"
 
 msgid "Host shell"
-msgstr ""
+msgstr "主機指令殼"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
+msgstr "用以監聽的 IP 地址。使用 0.0.0.0 來表示所有的 IP 地址。"
+
+msgid ""
+"Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
+"characters.<br/>Enter 'random' to generate a random string between 32 and 64"
+" chars.<br/>Enter 'random64' where the number 64 can be the length between "
+"32 and 64."
 msgstr ""
 
 msgid "Level"
-msgstr ""
+msgstr "層級"
 
 msgid "Message"
-msgstr ""
+msgstr "訊息"
 
 msgid "Module"
-msgstr ""
+msgstr "模組"
 
 msgid "Open UI"
-msgstr ""
+msgstr "開啟 UI"
 
 msgid ""
 "Override auto-login user for admins.<br/>Leave blank to use web interface "
@@ -62,18 +84,13 @@ msgid ""
 msgstr ""
 
 msgid "Port"
-msgstr ""
+msgstr "通訊埠"
 
 msgid "Port to listen on."
-msgstr ""
-
-msgid ""
-"Should be between 32 and 64 characters.<br/>Leave blank to disable auto-"
-"login."
-msgstr ""
+msgstr "用以監聽的通訊埠。"
 
 msgid "Updated cterm settings."
-msgstr ""
+msgstr "已更新 cterm 設定。"
 
 msgid "User must be in cterm group to login."
-msgstr ""
+msgstr "用户必須屬於 cterm 群組才能登入。"

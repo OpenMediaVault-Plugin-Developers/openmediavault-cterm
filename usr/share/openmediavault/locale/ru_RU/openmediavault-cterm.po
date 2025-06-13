@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 17:08-0500\n"
+"POT-Creation-Date: 2025-06-12 20:18-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
 "Last-Translator: Дмитрий <bardimnik@rambler.ru>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ru/)\n"
@@ -24,8 +24,19 @@ msgstr ""
 msgid "Auto-login secret"
 msgstr "Секрет для автоматического входа в систему"
 
+msgid ""
+"Auto-login secret is too short.  Must be at least 32 characters or disabled "
+"with 0 characters."
+msgstr ""
+
 msgid "Auto-login user"
 msgstr "Имя пользователя для автоматического входа в систему"
+
+msgid "Base path"
+msgstr ""
+
+msgid "Base path to use. Leave blank to disable."
+msgstr ""
 
 msgid "CTerm"
 msgstr "CTerm"
@@ -47,6 +58,13 @@ msgstr "Оболочка сервера"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr "IP для прослушивания. Используйте 0.0.0.0 для всех IP-адресов."
+
+msgid ""
+"Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
+"characters.<br/>Enter 'random' to generate a random string between 32 and 64"
+" chars.<br/>Enter 'random64' where the number 64 can be the length between "
+"32 and 64."
+msgstr ""
 
 msgid "Level"
 msgstr "Уровень"
@@ -74,11 +92,6 @@ msgstr "Порт"
 
 msgid "Port to listen on."
 msgstr "Порт для прослушивания."
-
-msgid ""
-"Should be between 32 and 64 characters.<br/>Leave blank to disable auto-"
-"login."
-msgstr ""
 
 msgid "Updated cterm settings."
 msgstr "Настройки cterm обновлены."

@@ -1,3 +1,34 @@
+openmediavault-cterm (7.8.5) stable; urgency=low
+
+  * Fix basepath cleanup
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 13 Jun 2025 08:00:16 -0500
+
+openmediavault-cterm (7.8.4) stable; urgency=low
+
+  * Add feature to generate random auto-login secret
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 13 Jun 2025 07:24:33 -0500
+
+openmediavault-cterm (7.8.3) stable; urgency=low
+
+  * Remove ts param to fix save
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 12 Jun 2025 19:48:23 -0500
+
+openmediavault-cterm (7.8.2) stable; urgency=low
+
+  * Fix auto-login
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 12 Jun 2025 18:01:41 -0500
+
+openmediavault-cterm (7.8.1) stable; urgency=low
+
+  * Improve security
+  * Add basepath option
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 12 Jun 2025 15:58:13 -0500
+
 openmediavault-cterm (7.8) stable; urgency=low
 
   * Add auto-login
