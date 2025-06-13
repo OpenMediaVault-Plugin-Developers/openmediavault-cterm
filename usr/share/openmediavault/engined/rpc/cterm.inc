@@ -60,13 +60,21 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
+        // generate secret if random or random## passed
         $params["autosecret"] = $this->generateSecret($params["autosecret"]);
         $len = strlen($params["autosecret"]);
         if ($len > 0 && $len < 32) {
             $msg = gettext("Auto-login secret is too short.  Must be at least 32 characters or disabled with 0 characters.");
             throw new \OMV\Exception($msg);
         }
-        $params['basepath'] = '/' . trim($params['basepath'], '/');
+        // cleanup basepath
+        $base = trim($params['basepath'] ?? '');
+        $base = trim($base, '/');
+        if ($base !== '') {
+            $base = '/'.$base;
+        }
+        $params['basepath'] = $base;
+        // update database
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.cterm");
         $object->setAssoc($params);
