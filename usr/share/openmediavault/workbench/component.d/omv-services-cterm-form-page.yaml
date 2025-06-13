@@ -44,7 +44,7 @@ data:
         name: autosecret
         label: _("Auto-login secret")
         value: ""
-        hint: _("Should be between 32 and 64 characters.<br/>Leave blank to disable auto-login.")
+        hint: _("Leave blank to disable auto-login.<br/>Should be between 32 and 64 characters.<br/>Enter 'random' to generate a random string between 32 and 64 chars.<br/>Enter 'random64' where the number 64 can be the length between 32 and 64.")
         validators:
           minLength: 0
           maxLength: 64

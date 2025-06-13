@@ -58,6 +58,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
+        $params["autosecret"] = $this->generateSecret($params["autosecret"]);
         $len = strlen($params["autosecret"]);
         if ($len > 0 && $len < 32) {
             $msg = gettext("Auto-login secret is too short.  Must be at least 32 characters or disabled with 0 characters.");
@@ -70,5 +71,26 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    private function generateSecret($input)
+    {
+        $minLen = 32;
+        $maxLen = 64;
+
+        if (strcasecmp($input, 'random') === 0) {
+            $length = random_int($minLen, $maxLen);
+        } elseif (preg_match('/^random(\d+)$/i', $input, $matches)) {
+            $length = max($minLen, min((int)$matches[1], $maxLen));
+        } else {
+            return $input;
+        }
+
+        // Generate URL-safe random string
+        // We need more bytes since base64 encoding has overhead
+        $bytesNeeded = ceil($length * 4 / 3);
+        $urlSafeString = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode(random_bytes($bytesNeeded)));
+
+        return substr($urlSafeString, 0, $length);
     }
 }
