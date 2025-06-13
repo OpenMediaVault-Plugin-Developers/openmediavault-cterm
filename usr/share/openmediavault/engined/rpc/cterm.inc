@@ -55,7 +55,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         // remove unneeded params
-        unset($params["ssl"], $params["omvuser"], $params["hmac"]);
+        unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
         $len = strlen($params["autosecret"]);
@@ -63,6 +63,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
             $msg = gettext("Auto-login secret is too short.  Must be at least 32 characters or disabled with 0 characters.");
             throw new \OMV\Exception($msg);
         }
+        $params['basepath'] = '/' . trim($params['basepath'], '/');
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.cterm");
         $object->setAssoc($params);
