@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-12 20:18-0500\n"
+"POT-Creation-Date: 2025-06-22 10:14-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
 "Language-Team: Polish (Poland) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pl_PL/)\n"
 "MIME-Version: 1.0\n"
@@ -83,6 +83,9 @@ msgid "Port"
 msgstr ""
 
 msgid "Port to listen on."
+msgstr ""
+
+msgid "Select a user ..."
 msgstr ""
 
 msgid "Updated cterm settings."
