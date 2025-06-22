@@ -74,22 +74,30 @@
                 cursorBlink: true,
                 fontSize: 14,
                 fontFamily: "'Menlo', 'Consolas', monospace",
+                allowTransparency: true,
+                selectionStyle: 'highlight',
                 theme: isDarkTheme ? {
                     background: '#1f2937',
                     foreground: '#f9fafb',
                     cursor: '#3b82f6',
-                    selection: 'rgba(59, 130, 246, 0.3)'
+                    selection: 'rgba(59, 130, 246, 0.3)',
+                    selectionForeground: '#f9fafb'
                 } : {
                     background: '#ffffff',
                     foreground: '#1f2937',
                     cursor: '#2563eb',
-                    selection: 'rgba(37, 99, 235, 0.3)'
+                    selection: 'rgba(37, 99, 235, 0.3)',
+                    selectionForeground: '#1f2937'
                 }
             });
 
             const fitAddon = new FitAddon.FitAddon();
             term.loadAddon(fitAddon);
             term.open(document.getElementById('terminal'));
+            
+            term.attachCustomKeyEventHandler((e) => {
+		return true;
+	    });
 
             // Resize pty + xterm whenever the window/container changes
             function fitAndSync() {
@@ -117,6 +125,7 @@
             // Terminal <-> Socket.io communication
             term.onData(data => socket.emit('terminal_input', { input: data, container }));
             term.focus();
+
             socket.on('output', data => term.write(data));
             socket.on('terminal_exit', () => {
                 term.write('\r\n\x1b[1;31m[Session ended - press any key to return]\x1b[0m\r\n');
