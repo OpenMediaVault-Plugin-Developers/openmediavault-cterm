@@ -9,6 +9,13 @@
             --bg: #f1f5f9;
             --card-bg: #ffffff;
             --transition: all 0.2s ease-out;
+            
+            --border-radius: 8px;
+            --bg-color: #f1f5f9;
+            --card-color: white;
+            --text-color: #1e293b;
+            --input-bg: white;
+            --input-border: #e2e8f0;
         }
 
         [data-theme="dark"] {
@@ -21,6 +28,13 @@
             --text: #f9fafb;
             --bg: #111827;
             --card-bg: #1f2937;
+            
+            --bg-color: #0f172a;
+            --card-color: #1e293b;
+            --text-color: #f8fafc;
+            --input-bg: #334155;
+            --input-border: #475569;
+            --dark-color: #f8fafc;
         }
 
         * {
@@ -238,6 +252,125 @@
             font-size: 32px;
             margin-bottom: 12px;
             color: var(--border);
+        }
+        
+/* Language Selector - Dropdown */
+        .language-selector {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            max-height: 40px; /* Fixed height */
+        }
+        
+        .language-dropdown {
+            position: relative;
+            min-width: 120px;
+            height: 100%;
+        }
+        
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-color);
+            border: 1px solid var(--input-border);
+            border-radius: var(--border-radius);
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            height: 100%;
+            box-sizing: border-box;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            width: max-content;
+            max-width: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: var(--card-color);
+            border: 1px solid var(--input-border);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            padding: 5px 0;
+            margin: 0;
+            scrollbar-width: thin;
+            scrollbar-color: #2496ed transparent;
+        }
+        
+        .language-dropdown[aria-expanded="true"] .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .dropdown-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        /* Container adjustments */
+        .container {
+            position: relative;
+            padding-top: 1.5rem; /* Reduced from 4.5rem */
+            min-height: auto; /* Remove fixed min-height */
+        }
+        
+        .language-name {
+            white-space: nowrap;
+        }
+        
+        /* Dark mode adjustments */
+        [data-theme="dark"] .dropdown-menu {
+            border-color: #475569;
+        }
+        
+        [data-theme="dark"] .dropdown-menu li a:hover {
+            background-color: rgba(36, 150, 237, 0.2);
+        }
+
+        /* RTL Support */
+        [lang="ar"], [lang="he"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        [lang="ar"] .dropdown-toggle,
+        [lang="he"] .dropdown-toggle {
+            flex-direction: row-reverse;
+        }
+
+        [lang="ar"] .dropdown-menu li a,
+        [lang="he"] .dropdown-menu li a {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        [lang="ar"] .fa-chevron-down,
+        [lang="he"] .fa-chevron-down {
+            margin-left: 0;
+            margin-right: auto;
         }
 
         @media (max-width: 640px) {
