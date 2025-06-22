@@ -723,7 +723,7 @@ def start_terminal(data: Dict[str, Any]):
                     'USER': username,
                     'LOGNAME': username,
                     'SHELL': shell,
-                    'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+                    'PATH': '/usr/local/bin:/usr/bin:/bin',
                     'TERM': 'xterm-256color'
                 })
                 env.pop('MAIL', None)
