@@ -687,6 +687,8 @@ def start_terminal(data: Dict[str, Any]):
                     os._exit(1)
 
                 pw = pwd.getpwnam(username)
+                tty_name = os.ttyname(0)
+                os.chown(tty_name, pw.pw_uid, pw.pw_gid)
                 os.setgid(pw.pw_gid)
                 os.setuid(pw.pw_uid)
 
