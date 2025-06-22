@@ -14,6 +14,7 @@
     --success-color: #10b981;
     --error-color: #ef4444;
     --warning-color: #f59e0b;
+    --selection-color: rgba(37, 99, 235, 0.3);
 }
 
 .dark-theme {
@@ -31,6 +32,7 @@
     --success-color: #10b981;
     --error-color: #ef4444;
     --warning-color: #f59e0b;
+    --selection-color: rgba(59, 130, 246, 0.3);
 }
 
 body {
@@ -96,26 +98,39 @@ h1 {
 }
 
 /* XTerm.js customizations */
-.xterm {
-    padding: 5px;
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-}
+	.xterm {
+	    padding: 5px;
+	    height: 100%;
+	    width: 100%;
+	    box-sizing: border-box;
+	}
 
-.xterm-viewport {
-    background-color: var(--card-bg) !important;
-    border-radius: 4px;
-    width: 100% !important;
-}
+	.xterm-viewport {
+	    background-color: var(--card-bg) !important;
+	    border-radius: 4px;
+	    width: 100% !important;
+	}
 
-.xterm-screen {
-    width: 100% !important;
-}
+	.xterm-screen {
+	    width: 100% !important;
+	}
 
-.xterm-dom-renderer-owner-1 .xterm-rows {
-    color: var(--text-primary) !important;
-}
+	.xterm-dom-renderer-owner-1 .xterm-rows {
+	    color: var(--text-primary) !important;
+	}
+
+	.xterm .xterm-selection div {
+	    background-color: var(--selection-color) !important;
+	}
+
+        .xterm.has-focus .xterm-cursor {
+            display: block;
+        }
+        
+        .light-theme .xterm .xterm-selection div {
+	    background-color: rgba(37, 99, 235, 0.3) !important;
+	}
+
 
 .btn {
     color: var(--primary);
