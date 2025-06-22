@@ -290,6 +290,17 @@ def auto_login_via_hmac():
         logger.warning("Invalid timestamp in HMAC auth")
         return
 
+    # Block root login
+    if user.lower() == 'root':
+        logger.warning("Root login attempt via HMAC blocked")
+        return
+
+    try:
+        timestamp = float(timestamp)
+    except ValueError:
+        logger.warning("Invalid timestamp in HMAC auth")
+        return
+
     # Check timestamp validity
     if abs(time.time() - timestamp) > HMAC_VALIDITY:
         logger.warning(f"Expired HMAC token for user {user}")
@@ -479,6 +490,16 @@ def login():
             container=container,
             container_type=container_type
         )
+        
+    # Block root login
+    if username.lower() == 'root':
+        logger.warning(f"Root login attempt blocked for user: {username}")
+        return render_template(
+            'login.html',
+            error=get_translation('root_login_blocked', lang),
+            container=container,
+            container_type=container_type
+        )
 
     if not pam_authenticate(username, password):
         logger.warning(f"Failed login attempt for user: {username}")
@@ -655,6 +676,11 @@ def start_terminal(data: Dict[str, Any]):
     container = data.get('container')
     container_type = data.get('container_type', 'docker')
     sid = request.sid
+
+    # Additional root check (just in case)
+    if username and username.lower() == 'root':
+        emit('output', get_translation('root_login_blocked', session.get('language', DEFAULT_LANGUAGE)) + '\n')
+        return
 
     if container == '__host__':
         if not config.host_shell:
