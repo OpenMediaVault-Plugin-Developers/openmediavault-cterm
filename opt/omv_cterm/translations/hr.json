@@ -19,5 +19,6 @@
     "connected_docker": "Povezan na Docker :: {container}",
     "container_terminal": "Terminal Spremnika",
     "no_container_running": "Nema pokrenutih spremnika",
-    "connected_to": "Povezan na "
+    "connected_to": "Povezan na ",
+    "root_login_blocked": "Prijava s korenskim dostopom ni dovoljena"
 }

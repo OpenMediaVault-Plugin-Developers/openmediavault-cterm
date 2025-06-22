@@ -19,5 +19,6 @@
     "connected_docker": "Docker'a bağlandı :: {container}",
     "container_terminal": "Konteyner Terminali",
     "no_container_running": "Çalışan konteyner yok",
-    "connected_to": "Bağlandı: "
+    "connected_to": "Bağlandı: ",
+    "root_login_blocked": "Kök oturum açmaya izin verilmiyor"
 }

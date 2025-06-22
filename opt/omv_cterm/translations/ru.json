@@ -19,5 +19,6 @@
     "connected_docker": "Подключено к Docker :: {container}",
     "container_terminal": "Терминал Контейнера",
     "no_container_running": "Нет работающих контейнеров",
-    "connected_to": "Подключено к "
+    "connected_to": "Подключено к ",
+    "root_login_blocked": "Вход с правами root не допускается."
 }

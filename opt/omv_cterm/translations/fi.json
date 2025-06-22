@@ -19,5 +19,6 @@
     "connected_docker": "Yhdistetty Docker :: {container}",
     "container_terminal": "Säiliöterminaali",
     "no_container_running": "Ei käynnissä olevia säiliöitä",
-    "connected_to": "Yhdistetty "
+    "connected_to": "Yhdistetty ",
+    "root_login_blocked": "Pääkäyttäjän kirjautuminen ei ole sallittu"
 }

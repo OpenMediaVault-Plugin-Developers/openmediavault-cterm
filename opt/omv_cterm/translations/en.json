@@ -19,5 +19,6 @@
     "connected_docker": "Connected to Docker :: {container}",
     "container_terminal": "Container Terminal",
     "no_container_running": "No running containers",
-    "connected_to": "Connected to "
+    "connected_to": "Connected to ",
+    "root_login_blocked": "Root login is not allowed"
 }

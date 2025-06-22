@@ -19,5 +19,6 @@
     "connected_docker": "Forbundet til Docker :: {container}",
     "container_terminal": "Container Terminal",
     "no_container_running": "Ingen containere kører",
-    "connected_to": "Forbundet til "
+    "connected_to": "Forbundet til ",
+    "root_login_blocked": "Root-login er ikke tilladt"
 }

@@ -19,5 +19,6 @@
     "connected_docker": "Verbonden met Docker :: {container}",
     "container_terminal": "Container Terminal",
     "no_container_running": "Geen actieve containers",
-    "connected_to": "Verbonden met "
+    "connected_to": "Verbonden met ",
+    "root_login_blocked": "Root-aanmelding is niet toegestaan"
 }

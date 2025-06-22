@@ -19,5 +19,6 @@
     "connected_docker": "Tilkoblet Docker :: {container}",
     "container_terminal": "Container Terminal",
     "no_container_running": "Ingen containere i drift",
-    "connected_to": "Tilkoblet "
+    "connected_to": "Tilkoblet ",
+    "root_login_blocked": "Root-pålogging er ikke tillatt"
 }
