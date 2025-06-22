@@ -1,3 +1,15 @@
+openmediavault-cterm (7.8.6) stable; urgency=low
+
+  * Change user text input to dropdown
+  * Block root login
+  * Add Changes for start_terminal/better colors
+  * Fix Css Background color
+  * Add Select Language to Containers List
+  * Add Select Language Css styles.
+  * Change ownership of pty
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 22 Jun 2025 10:13:45 -0500
+
 openmediavault-cterm (7.8.5) stable; urgency=low
 
   * Fix basepath cleanup
