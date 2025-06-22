@@ -1,3 +1,9 @@
+openmediavault-cterm (7.8.7) stable; urgency=low
+
+  * Fix su command in host shell
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 22 Jun 2025 18:06:33 -0500
+
 openmediavault-cterm (7.8.6) stable; urgency=low
 
   * Change user text input to dropdown
