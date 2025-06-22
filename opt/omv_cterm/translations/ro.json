@@ -19,5 +19,6 @@
     "connected_docker": "Conectat la Docker :: {container}",
     "container_terminal": "Terminal Container",
     "no_container_running": "Niciun container în execuție",
-    "connected_to": "Conectat la "
+    "connected_to": "Conectat la ",
+    "root_login_blocked": "Nu este permisă conectarea la root"
 }

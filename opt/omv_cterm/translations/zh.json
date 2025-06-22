@@ -19,5 +19,6 @@
     "connected_docker": "已连接到Docker :: {container}",
     "container_terminal": "容器终端",
     "no_container_running": "没有运行的容器",
-    "connected_to": "已连接到"
+    "connected_to": "已连接到",
+    "root_login_blocked": "不允许 root 登录"
 }

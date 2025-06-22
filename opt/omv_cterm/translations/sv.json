@@ -19,5 +19,6 @@
     "connected_docker": "Ansluten till Docker :: {container}",
     "container_terminal": "Container Terminal",
     "no_container_running": "Inga containrar körs",
-    "connected_to": "Ansluten till "
+    "connected_to": "Ansluten till ",
+    "root_login_blocked": "Root-inloggning är inte tillåten"
 }

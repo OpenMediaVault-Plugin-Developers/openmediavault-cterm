@@ -19,5 +19,6 @@
     "connected_docker": "متصل بـ Docker :: {container}",
     "container_terminal": "طرفية الحاوية",
     "no_container_running": "لا توجد حاويات قيد التشغيل",
-    "connected_to": "متصل بـ "
+    "connected_to": "متصل بـ ",
+    "root_login_blocked": "لا يُسمح بتسجيل الدخول الجذري"
 }

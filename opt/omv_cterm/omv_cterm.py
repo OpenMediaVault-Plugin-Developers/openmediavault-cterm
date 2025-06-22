@@ -290,6 +290,17 @@ def auto_login_via_hmac():
         logger.warning("Invalid timestamp in HMAC auth")
         return
 
+    # Block root login
+    if user.lower() == 'root':
+        logger.warning("Root login attempt via HMAC blocked")
+        return
+
+    try:
+        timestamp = float(timestamp)
+    except ValueError:
+        logger.warning("Invalid timestamp in HMAC auth")
+        return
+
     # Check timestamp validity
     if abs(time.time() - timestamp) > HMAC_VALIDITY:
         logger.warning(f"Expired HMAC token for user {user}")
@@ -476,6 +487,16 @@ def login():
         return render_template(
             'login.html',
             error=get_translation('required_error', lang),
+            container=container,
+            container_type=container_type
+        )
+        
+    # Block root login
+    if username.lower() == 'root':
+        logger.warning(f"Root login attempt blocked for user: {username}")
+        return render_template(
+            'login.html',
+            error=get_translation('root_login_blocked', lang),
             container=container,
             container_type=container_type
         )
@@ -695,16 +716,21 @@ def start_terminal(data: Dict[str, Any]):
                 home_dir = pw.pw_dir if os.path.isdir(pw.pw_dir) else '/tmp'
                 os.chdir(home_dir)
 
+                shell = pw.pw_shell if pw.pw_shell else '/bin/bash'
                 env.update({
                     'HOME': pw.pw_dir,
                     'PWD': home_dir,
                     'USER': username,
-                    'LOGNAME': username
+                    'LOGNAME': username,
+                    'SHELL': shell,
+                    'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+                    'TERM': 'xterm-256color'
                 })
                 env.pop('MAIL', None)
+                env.pop('OLDPWD', None)
 
-                args = ['--login', '-i']
-                os.execvpe('bash', args, env)
+                args = ['bash', '--login', '-i'] if 'bash' in shell else [shell, '-i']
+                os.execvpe(args[0], args, env)
 
             elif container_type == 'lxc':
                 args = ['virsh', '-c', 'lxc:///', 'console', container]

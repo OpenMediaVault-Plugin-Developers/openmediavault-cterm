@@ -19,5 +19,6 @@
     "connected_docker": "Docker에 연결됨 :: {container}",
     "container_terminal": "컨테이너 터미널",
     "no_container_running": "실행 중인 컨테이너가 없습니다",
-    "connected_to": "연결됨: "
+    "connected_to": "연결됨: ",
+    "root_login_blocked": "루트 로그인이 허용되지 않습니다."
 }

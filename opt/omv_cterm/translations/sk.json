@@ -19,5 +19,6 @@
     "connected_docker": "Pripojené k Docker :: {container}",
     "container_terminal": "Terminál Kontajnera",
     "no_container_running": "Žiadne bežiace kontajnery",
-    "connected_to": "Pripojené k "
+    "connected_to": "Pripojené k ",
+    "root_login_blocked": "Prihlásenie root nie je povolené"
 }

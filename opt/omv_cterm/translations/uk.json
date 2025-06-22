@@ -19,5 +19,6 @@
     "connected_docker": "Підключено до Docker :: {container}",
     "container_terminal": "Термінал Контейнера",
     "no_container_running": "Немає запущених контейнерів",
-    "connected_to": "Підключено до "
+    "connected_to": "Підключено до ",
+    "root_login_blocked": "Вхід root-права заборонено"
 }

@@ -19,5 +19,6 @@
     "connected_docker": "Dockerに接続しました :: {container}",
     "container_terminal": "コンテナターミナル",
     "no_container_running": "実行中のコンテナがありません",
-    "connected_to": "接続先: "
+    "connected_to": "接続先: ",
+    "root_login_blocked": "ルートログインは許可されていません"
 }

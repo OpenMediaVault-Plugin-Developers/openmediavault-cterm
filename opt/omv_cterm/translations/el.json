@@ -19,5 +19,6 @@
     "connected_docker": "Συνδέθηκε στο Docker :: {container}",
     "container_terminal": "Τερματικό Container",
     "no_container_running": "Δεν υπάρχουν ενεργά containers",
-    "connected_to": "Συνδέθηκε στο "
+    "connected_to": "Συνδέθηκε στο ",
+    "root_login_blocked": "Δεν επιτρέπεται η σύνδεση root"
 }

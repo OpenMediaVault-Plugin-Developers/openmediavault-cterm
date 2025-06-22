@@ -19,5 +19,6 @@
     "connected_docker": "Csatlakozva a Dockerhez :: {container}",
     "container_terminal": "Konténer Terminál",
     "no_container_running": "Nincs futó konténer",
-    "connected_to": "Csatlakozva ehhez: "
+    "connected_to": "Csatlakozva ehhez: ",
+    "root_login_blocked": "Root bejelentkezés nem engedélyezett"
 }
