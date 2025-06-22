@@ -48,10 +48,21 @@ data:
         validators:
           minLength: 0
           maxLength: 64
-      - type: textInput
+      - type: select
         name: autouser
         label: _("Auto-login user")
+        placeholder: _("Select a user ...")
         value: ""
+        valueField: "name"
+        textField: "name"
+        store:
+          proxy:
+            service: Cterm
+            get:
+              method: enumerateUsers
+          sorters:
+            dir: asc
+            prop: name
         validators:
           minLength: 0
           maxLength: 32

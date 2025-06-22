@@ -27,6 +27,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
     {
         $this->registerMethod("get");
         $this->registerMethod("set");
+        $this->registerMethod("enumerateUsers");
     }
 
     public function get($params, $context)
@@ -102,5 +103,19 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $urlSafeString = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode(random_bytes($bytesNeeded)));
 
         return substr($urlSafeString, 0, $length);
+    }
+
+    public function enumerateUsers($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $users = \OMV\Rpc\Rpc::call("UserMgmt", "enumerateUsers", [], $context);
+        $nouser = [
+            'name' => '', 'uid' => null, 'gid' => null,
+            'comment' => '', 'dir' => '', 'shell' => ''
+        ];
+        array_unshift($users, $nouser);
+        // Return the configuration object.
+        return $users;
     }
 }
