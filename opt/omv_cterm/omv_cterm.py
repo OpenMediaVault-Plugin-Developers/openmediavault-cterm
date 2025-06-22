@@ -490,7 +490,7 @@ def login():
             container=container,
             container_type=container_type
         )
-        
+
     # Block root login
     if username.lower() == 'root':
         logger.warning(f"Root login attempt blocked for user: {username}")
@@ -756,12 +756,19 @@ def start_terminal(data: Dict[str, Any]):
 
     else:  # Parent process
         try:
-            tty.setraw(master_fd)
             if container == '__host__':
                 attrs = termios.tcgetattr(master_fd)
-                attrs[3] |= termios.ECHO
+                attrs[0] &= ~(termios.IGNBRK | termios.BRKINT | termios.PARMRK | termios.ISTRIP |
+                              termios.INLCR | termios.IGNCR | termios.IXON)
+                attrs[0] |= termios.ICRNL
                 attrs[1] |= termios.OPOST | termios.ONLCR
+                attrs[2] &= ~termios.CSIZE
+                attrs[2] |= termios.CS8
+                attrs[3] |= (termios.ICANON | termios.ECHO | termios.ECHOE |
+                             termios.ECHOK | termios.ISIG | termios.IEXTEN)
                 termios.tcsetattr(master_fd, termios.TCSADRAIN, attrs)
+            else:
+                tty.setraw(master_fd)
 
             shells[sid] = (master_fd, pid)
             threading.Thread(
