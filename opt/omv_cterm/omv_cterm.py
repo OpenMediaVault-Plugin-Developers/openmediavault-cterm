@@ -677,11 +677,6 @@ def start_terminal(data: Dict[str, Any]):
     container_type = data.get('container_type', 'docker')
     sid = request.sid
 
-    # Additional root check (just in case)
-    if username and username.lower() == 'root':
-        emit('output', get_translation('root_login_blocked', session.get('language', DEFAULT_LANGUAGE)) + '\n')
-        return
-
     if container == '__host__':
         if not config.host_shell:
             emit('output', get_translation('host_shell_disabled', session.get('language', DEFAULT_LANGUAGE)) + '\n')
@@ -719,16 +714,21 @@ def start_terminal(data: Dict[str, Any]):
                 home_dir = pw.pw_dir if os.path.isdir(pw.pw_dir) else '/tmp'
                 os.chdir(home_dir)
 
+                shell = pw.pw_shell if pw.pw_shell else '/bin/bash'
                 env.update({
                     'HOME': pw.pw_dir,
                     'PWD': home_dir,
                     'USER': username,
-                    'LOGNAME': username
+                    'LOGNAME': username,
+                    'SHELL': shell,
+                    'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+                    'TERM': 'xterm-256color'
                 })
                 env.pop('MAIL', None)
+                env.pop('OLDPWD', None)
 
-                args = ['--login', '-i']
-                os.execvpe('bash', args, env)
+                args = ['bash', '--login', '-i'] if 'bash' in shell else [shell, '-i']
+                os.execvpe(args[0], args, env)
 
             elif container_type == 'lxc':
                 args = ['virsh', '-c', 'lxc:///', 'console', container]
