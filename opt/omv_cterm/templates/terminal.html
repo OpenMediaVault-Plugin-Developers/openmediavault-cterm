@@ -125,16 +125,7 @@
             const containerType = "{{ container_type or 'docker' }}";
 
             // Terminal <-> Socket.io communication
-            //term.onData(data => socket.emit('terminal_input', { input: data, container }));
-		term.onData(data => {
-		    // Handle special keys
-		    if (data === '\r') {
-			data = '\r';
-		    } else if (data === '\x7f') {  // Backspace
-			data = '\b';
-		    }
-		    socket.emit('terminal_input', { input: data, container });
-		});
+            term.onData(data => socket.emit('terminal_input', { input: data, container }));
             term.focus();
 
             socket.on('output', data => term.write(data));
