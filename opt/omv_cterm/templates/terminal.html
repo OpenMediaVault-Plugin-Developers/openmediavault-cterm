@@ -65,7 +65,7 @@
             });
 
             // Initialize terminal with theme
-            initTerminal(initialTheme === 'dark');
+            initTerminal(initialTheme === 'light');
         });
 
         // Terminal initialization
@@ -76,12 +76,14 @@
                 fontFamily: "'Menlo', 'Consolas', monospace",
                 allowTransparency: true,
                 selectionStyle: 'highlight',
+                convertEol: true,  // Important for proper line handling
+                disableStdin: false,
                 theme: isDarkTheme ? {
                     background: '#1f2937',
                     foreground: '#f9fafb',
                     cursor: '#3b82f6',
                     selection: 'rgba(59, 130, 246, 0.3)',
-                    selectionForeground: '#f9fafb'
+                    selectionForeground: '#c3c6c9'
                 } : {
                     background: '#ffffff',
                     foreground: '#1f2937',
