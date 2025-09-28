@@ -1,3 +1,9 @@
+openmediavault-cterm (8.0) stable; urgency=low
+
+  * update for omv 8.x
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 28 Sep 2025 09:20:23 -0500
+
 openmediavault-cterm (7.8.7) stable; urgency=low
 
   * Fix su command in host shell
