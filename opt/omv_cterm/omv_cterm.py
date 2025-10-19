@@ -650,6 +650,10 @@ def read_and_emit(master_fd: int, sid: str):
 
 @socketio.on('connect')
 def on_connect():
+    if not session.get('username'):
+        logger.info(f"No username for: {request.sid}")
+        disconnect()
+        return
     """Handle new client connection"""
     logger.info(f"Client connected: {request.sid}")
 
@@ -672,6 +676,10 @@ def on_disconnect():
 
 @socketio.on('start_terminal')
 def start_terminal(data: Dict[str, Any]):
+    if not session.get('username'):
+        emit('output', 'Authentication required.\n')
+        disconnect()
+        return
     """Start a new terminal session"""
     container = data.get('container')
     container_type = data.get('container_type', 'docker')
