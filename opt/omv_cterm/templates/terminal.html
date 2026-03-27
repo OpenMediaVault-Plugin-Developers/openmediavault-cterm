@@ -121,8 +121,8 @@
             const socket = io({ 
                     path :'{{ basepath_io }}'
                  });
-            const container = "{{ container }}";
-            const containerType = "{{ container_type or 'docker' }}";
+            const container = {{ container | tojson }};
+            const containerType = {{ (container_type or 'docker') | tojson }};
 
             // Terminal <-> Socket.io communication
             term.onData(data => socket.emit('terminal_input', { input: data, container }));

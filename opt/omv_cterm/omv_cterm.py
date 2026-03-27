@@ -50,13 +50,20 @@ DEFAULT_LANGUAGE = 'en'
 # Hmac secure
 HMAC_VALIDITY = 60  # HMAC validity time in seconds
 USERNAME_PATTERN = re.compile(r'^[a-z0-9._-]{1,32}$', re.IGNORECASE)
+CONTAINER_NAME_PATTERN = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_.\-]{0,127}$')
 
 # Setup logging
+_log_file = "/var/log/omv_cterm.log"
+_file_handler = logging.FileHandler(_log_file)
+try:
+    os.chmod(_log_file, 0o600)
+except OSError:
+    pass
 logging.basicConfig(
     level=logging.INFO,
     format=LOG_FORMAT,
     handlers=[
-        logging.FileHandler("/var/log/omv_cterm.log"),
+        _file_handler,
         logging.StreamHandler()
     ]
 )
@@ -124,6 +131,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SECURE"] = config.use_https
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["PERMANENT_SESSION_LIFETIME"] = 3600  # 1 hour
 app.config["APPLICATION_ROOT"] = config.basepath
 
@@ -295,12 +303,6 @@ def auto_login_via_hmac():
         logger.warning("Root login attempt via HMAC blocked")
         return
 
-    try:
-        timestamp = float(timestamp)
-    except ValueError:
-        logger.warning("Invalid timestamp in HMAC auth")
-        return
-
     # Check timestamp validity
     if abs(time.time() - timestamp) > HMAC_VALIDITY:
         logger.warning(f"Expired HMAC token for user {user}")
@@ -446,7 +448,16 @@ def after_request(response):
         'Pragma': 'no-cache',
         'Expires': '0',
         'X-Content-Type-Options': 'nosniff',
-        'X-Frame-Options': 'DENY'
+        'X-Frame-Options': 'DENY',
+        'Content-Security-Policy': (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
+            "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
+            "font-src https://cdnjs.cloudflare.com; "
+            "connect-src 'self' ws: wss:; "
+            "img-src 'self' data:; "
+            "frame-ancestors 'none';"
+        )
     })
     return response
 
@@ -685,13 +696,17 @@ def start_terminal(data: Dict[str, Any]):
     container_type = data.get('container_type', 'docker')
     sid = request.sid
 
+    if not container:
+        emit('output', get_translation('no_container_specified', session.get('language', DEFAULT_LANGUAGE)) + '\n')
+        return
+
     if container == '__host__':
         if not config.host_shell:
             emit('output', get_translation('host_shell_disabled', session.get('language', DEFAULT_LANGUAGE)) + '\n')
             return
-
-    if not container:
-        emit('output', get_translation('no_container_specified', session.get('language', DEFAULT_LANGUAGE)) + '\n')
+    elif not CONTAINER_NAME_PATTERN.fullmatch(container):
+        logger.warning(f"Invalid container name rejected: {container!r}")
+        emit('output', 'Invalid container name.\n')
         return
 
     if sid in shells:
@@ -721,7 +736,7 @@ def start_terminal(data: Dict[str, Any]):
                 os.setgid(pw.pw_gid)
                 os.setuid(pw.pw_uid)
 
-                home_dir = pw.pw_dir if os.path.isdir(pw.pw_dir) else '/tmp'
+                home_dir = pw.pw_dir if os.path.isdir(pw.pw_dir) else '/'
                 os.chdir(home_dir)
 
                 shell = pw.pw_shell if pw.pw_shell else '/bin/bash'
@@ -865,7 +880,7 @@ if __name__ == '__main__':
         run_kwargs = {
             'host': config.host,
             'port': config.port,
-            'allow_unsafe_werkzeug': True,  # Only for development!
+            'allow_unsafe_werkzeug': os.environ.get('CTERM_DEV_MODE', '').lower() == '1',
             'log_output': False
         }
 
