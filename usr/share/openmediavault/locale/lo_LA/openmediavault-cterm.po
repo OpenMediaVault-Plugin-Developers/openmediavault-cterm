@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the openmediavault-cterm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# bounkirdni_2025, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-cterm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-22 10:14-0500\n"
+"PO-Revision-Date: 2025-06-11 11:02+0000\n"
+"Last-Translator: bounkirdni_2025, 2026\n"
+"Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo_LA\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Auto-login secret"
+msgstr "ລະຫັດລັບການເຂົ້າລະບົບອັດຕະໂນມັດ"
+
+msgid ""
+"Auto-login secret is too short.  Must be at least 32 characters or disabled "
+"with 0 characters."
+msgstr ""
+"ລະຫັດລັບການເຂົ້າລະບົບອັດຕະໂນມັດສັ້ນໂພດ. ຕ້ອງມີຢ່າງໜ້ອຍ 32 ຕົວອັກສອນ ຫຼື "
+"ປິດການໃຊ້ງານດ້ວຍ 0 ຕົວອັກສອນ."
+
+msgid "Auto-login user"
+msgstr "ຜູ້ໃຊ້ເຂົ້າລະບົບອັດຕະໂນມັດ"
+
+msgid "Base path"
+msgstr "ເສັ້ນທາງພື້ນຖານ (Base path)"
+
+msgid "Base path to use. Leave blank to disable."
+msgstr "ເສັ້ນທາງພື້ນຖານທີ່ຈະໃຊ້. ປະຫວ່າງໄວ້ເພື່ອປິດການໃຊ້ງານ."
+
+msgid "CTerm"
+msgstr "CTerm"
+
+msgid "Date & Time"
+msgstr "ວັນທີ ແລະ ເວລາ"
+
+msgid "Enable"
+msgstr "ເປີດໃຊ້ງານ"
+
+msgid "Enable host shell option in container list."
+msgstr "ເປີດໃຊ້ງານຕົວເລືອກ host shell ໃນລາຍການ container."
+
+msgid "Host"
+msgstr "ໂຮສ (Host)"
+
+msgid "Host shell"
+msgstr "Host shell"
+
+msgid "IP to listen on. Use 0.0.0.0 for all IPs."
+msgstr "IP ທີ່ຈະຮັບການເຊື່ອມຕໍ່. ໃຊ້ 0.0.0.0 ສຳລັບທຸກ IP."
+
+msgid ""
+"Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
+"characters.<br/>Enter 'random' to generate a random string between 32 and 64"
+" chars.<br/>Enter 'random64' where the number 64 can be the length between "
+"32 and 64."
+msgstr ""
+"ປະຫວ່າງໄວ້ເພື່ອປິດການເຂົ້າລະບົບອັດຕະໂນມັດ.<br/>ຄວນມີຄວາມຍາວລະຫວ່າງ 32 ຫາ 64 "
+"ຕົວອັກສອນ.<br/>ປ້ອນ 'random' ເພື່ອສ້າງຂໍ້ຄວາມແບບສຸ່ມລະຫວ່າງ 32 ຫາ 64 "
+"ຕົວອັກສອນ.<br/>ປ້ອນ 'random64' ໂດຍທີ່ຕົວເລກ 64 ສາມາດເປັນຄວາມຍາວລະຫວ່າງ 32 ຫາ"
+" 64."
+
+msgid "Level"
+msgstr "ລະດັບ"
+
+msgid "Message"
+msgstr "ຂໍ້ຄວາມ"
+
+msgid "Module"
+msgstr "ໂມດູນ (Module)"
+
+msgid "Open UI"
+msgstr "ເປີດ UI"
+
+msgid ""
+"Override auto-login user for admins.<br/>Leave blank to use web interface "
+"user.<br/>Non-admins will always use web interface user."
+msgstr ""
+"ແທນທີ່ຜູ້ໃຊ້ເຂົ້າລະບົບອັດຕະໂນມັດສຳລັບຜູ້ດູແລລະບົບ.<br/>ປະຫວ່າງໄວ້ເພື່ອໃຊ້ຜູ້ໃຊ້ຈາກ"
+" web interface.<br/>ຜູ້ທີ່ບໍ່ແມ່ນຜູ້ດູແລລະບົບຈະໃຊ້ຜູ້ໃຊ້ຈາກ web interface "
+"ສະເໝີ."
+
+msgid "Port"
+msgstr "ພອດ (Port)"
+
+msgid "Port to listen on."
+msgstr "ພອດທີ່ຈະຮັບການເຊື່ອມຕໍ່."
+
+msgid "Select a user ..."
+msgstr "ເລືອກຜູ້ໃຊ້ ..."
+
+msgid "Updated cterm settings."
+msgstr "ອັບເດດການຕັ້ງຄ່າ cterm ແລ້ວ."
+
+msgid "User must be in cterm group to login."
+msgstr "ຜູ້ໃຊ້ຕ້ອງຢູ່ໃນກຸ່ມ cterm ຈຶ່ງຈະສາມາດເຂົ້າລະບົບໄດ້."

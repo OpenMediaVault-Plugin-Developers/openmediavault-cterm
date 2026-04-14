@@ -93,7 +93,7 @@ msgid "Port to listen on."
 msgstr "监听端口。"
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "选择一个用户 ..."
 
 msgid "Updated cterm settings."
 msgstr "更新 cterm 设置。"

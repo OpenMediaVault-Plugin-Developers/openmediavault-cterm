@@ -3,9 +3,6 @@
 # This file is distributed under the same license as the openmediavault-cterm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Stephan Paternotte <stephan@paternottes.net>, 2025
-# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -13,53 +10,50 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-22 10:14-0500\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
-"Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
-"Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
+"Language-Team: Lao (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: lo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Auto-login secret"
-msgstr "Auto-login geheim"
+msgstr ""
 
 msgid ""
 "Auto-login secret is too short.  Must be at least 32 characters or disabled "
 "with 0 characters."
 msgstr ""
-"Auto-login geheim is te kort. Moet minimaal 32 tekens bevatten of "
-"uitgeschakeld zijn met 0 tekens."
 
 msgid "Auto-login user"
-msgstr "Auto-login gebruiker"
+msgstr ""
 
 msgid "Base path"
-msgstr "Basispad"
+msgstr ""
 
 msgid "Base path to use. Leave blank to disable."
-msgstr "Te gebruiken basispad. Leeg laten om uit te schakelen."
+msgstr ""
 
 msgid "CTerm"
-msgstr "CTerm"
+msgstr ""
 
 msgid "Date & Time"
-msgstr "Datum & Tijd"
+msgstr ""
 
 msgid "Enable"
-msgstr "Inschakelen"
+msgstr ""
 
 msgid "Enable host shell option in container list."
-msgstr "Host shell-optie in de containerlijst inschakelen."
+msgstr ""
 
 msgid "Host"
-msgstr "Host"
+msgstr ""
 
 msgid "Host shell"
-msgstr "Host shell"
+msgstr ""
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
-msgstr "Te beluisteren IP. Gebruik 0.0.0.0 voor alle IP's."
+msgstr ""
 
 msgid ""
 "Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
@@ -67,42 +61,35 @@ msgid ""
 " chars.<br/>Enter 'random64' where the number 64 can be the length between "
 "32 and 64."
 msgstr ""
-"Laat leeg om automatisch inloggen uit te schakelen.<br/>Moet tussen de 32 en"
-" 64 tekens zijn.<br/>Voer 'radom' in om een willekeurige tekenreeks tussen "
-"32 en 64 tekens te genereren.<br/>Voer 'random64' in waarbij het getal 64 de"
-" lengte tussen 32 en 64 kan zijn."
 
 msgid "Level"
-msgstr "Niveau"
+msgstr ""
 
 msgid "Message"
-msgstr "Bericht"
+msgstr ""
 
 msgid "Module"
-msgstr "Module"
+msgstr ""
 
 msgid "Open UI"
-msgstr "UI openen"
+msgstr ""
 
 msgid ""
 "Override auto-login user for admins.<br/>Leave blank to use web interface "
 "user.<br/>Non-admins will always use web interface user."
 msgstr ""
-"Auto-login gebruiker voor admins overschrijven.<br/>Laat leeg om "
-"webinterfacegebruiker te gebruiken.<br/>Niet-beheerders zullen altijd een "
-"webinterfacegebruiker gebruiken."
 
 msgid "Port"
-msgstr "Poort"
+msgstr ""
 
 msgid "Port to listen on."
-msgstr "Te beluisteren poort."
+msgstr ""
 
 msgid "Select a user ..."
-msgstr "Selecteer een gebruiker…"
+msgstr ""
 
 msgid "Updated cterm settings."
-msgstr "Cterm-instellingen bijgewerkt."
+msgstr ""
 
 msgid "User must be in cterm group to login."
-msgstr "Gebruiker moet lid zijn van de cterm-groep om in te loggen."
+msgstr ""
