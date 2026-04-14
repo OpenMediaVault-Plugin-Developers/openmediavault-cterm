@@ -1,3 +1,9 @@
+openmediavault-cterm (8.0.1) stable; urgency=low
+
+  * Improve security
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 14 Apr 2026 22:19:11 +0000
+
 openmediavault-cterm (8.0) stable; urgency=low
 
   * update for omv 8.x

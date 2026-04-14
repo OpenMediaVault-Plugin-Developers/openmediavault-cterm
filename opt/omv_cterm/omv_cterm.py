@@ -880,7 +880,7 @@ if __name__ == '__main__':
         run_kwargs = {
             'host': config.host,
             'port': config.port,
-            'allow_unsafe_werkzeug': os.environ.get('CTERM_DEV_MODE', '').lower() == '1',
+            'allow_unsafe_werkzeug': True,
             'log_output': False
         }
 
