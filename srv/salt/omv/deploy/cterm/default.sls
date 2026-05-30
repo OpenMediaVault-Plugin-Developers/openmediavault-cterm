@@ -31,7 +31,7 @@ configure_cterm:
         webadmin: {{ webadmin | json }}
     - user: root
     - group: root
-    - mode: '644'
+    - mode: '0644'
 
 configure_cterm_secret:
   file.managed:
@@ -52,7 +52,7 @@ configure_cterm_unit:
         webadmin: {{ webadmin | json }}
     - user: root
     - group: root
-    - mode: '644'
+    - mode: '0644'
 
 systemd_daemon_reload_cterm:
   cmd.run:
