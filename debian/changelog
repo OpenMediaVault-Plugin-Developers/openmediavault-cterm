@@ -1,3 +1,10 @@
+openmediavault-cterm (8.0.2) stable; urgency=low
+
+  * Add option to reverse proxy the terminal through the openmediavault
+    web server (e.g. https://omv-host/cterm)
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 03 Jun 2026 00:00:00 +0000
+
 openmediavault-cterm (8.0.1) stable; urgency=low
 
   * Improve security

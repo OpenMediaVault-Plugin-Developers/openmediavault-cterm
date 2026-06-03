@@ -14,6 +14,12 @@ case "$1" in
       rm -f "${unit}"
       systemctl daemon-reload
     fi
+    # remove nginx reverse proxy config and reload nginx
+    nginxconf="/etc/nginx/openmediavault-webgui.d/openmediavault-cterm.conf"
+    if [ -f "${nginxconf}" ]; then
+      rm -f "${nginxconf}"
+      nginx -t && systemctl reload nginx || :
+    fi
   ;;
 
   upgrade)

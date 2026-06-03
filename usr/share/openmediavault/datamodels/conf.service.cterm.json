@@ -23,6 +23,9 @@
     "hostshell": {
       "type": "boolean"
     },
+    "enablenginx": {
+      "type": "boolean"
+    },
     "autosecret": {
       "type": "string",
       "default": "",

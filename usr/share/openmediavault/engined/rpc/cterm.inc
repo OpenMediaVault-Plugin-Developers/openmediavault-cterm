@@ -40,6 +40,10 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         // ssl
         $webadmin = $db->get("conf.webadmin");
         $object->add("ssl", "string", boolval($webadmin->get("enablessl")) ? "https" : "");
+        // normalized base path for the reverse proxy URL (guaranteed single
+        // leading slash, no trailing slash, empty when unset)
+        $bp = trim(strval($object->get("basepath")), "/");
+        $object->add("proxypath", "string", $bp !== "" ? "/".$bp : "");
         // auto-login
         $autouser = $object->get('autouser') ?: $context['username'];
         $secret = trim(file_get_contents('/etc/omv_cterm.secret'));
@@ -58,7 +62,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         // remove unneeded params
-        unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"]);
+        unset($params["ssl"], $params["omvuser"], $params["hmac"], $params["ts"], $params["proxypath"]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.cterm.set");
         // generate secret if random or random## passed

@@ -21,6 +21,11 @@ data:
         label: _("Host shell")
         value: false
         hint: _("Enable host shell option in container list.")
+      - type: checkbox
+        name: enablenginx
+        label: _("Reverse proxy")
+        value: false
+        hint: _("Serve the terminal through the openmediavault web server, e.g. https://omv-host/cterm.<br/>Requires a base path to be set. The web server terminates TLS, so the backend listens on plain HTTP locally.")
       - type: textInput
         name: host
         label: _("Host")
@@ -71,6 +76,9 @@ data:
         name: ssl
         value: ""
       - type: hidden
+        name: proxypath
+        value: ""
+      - type: hidden
         name: omvuser
         value: ""
       - type: hidden
@@ -87,7 +95,7 @@ data:
             prop: "enable"
         execute:
           type: url
-          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}"
+          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{% if enablenginx %}{{ ['://', location() | get('hostname'), proxypath, '/?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% else %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% endif %}"
       - template: submit
       - template: cancel
         execute:

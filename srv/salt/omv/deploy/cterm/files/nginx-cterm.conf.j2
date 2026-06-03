@@ -1,0 +1,35 @@
+{{ pillar['headers']['multiline'] }}
+{%- set port = config.port -%}
+{%- set basepath = config.basepath -%}
+# Redirect the bare base path to the trailing-slash form.
+location = {{ basepath }} {
+    return 301 {{ basepath }}/;
+}
+
+# Reverse proxy for openmediavault-cterm. The web server terminates TLS;
+# the backend listens on plain HTTP on the loopback interface.
+location ^~ {{ basepath }}/ {
+    proxy_pass         http://127.0.0.1:{{ port }}{{ basepath }}/;
+    proxy_http_version 1.1;
+    proxy_set_header   Upgrade $http_upgrade;
+    proxy_set_header   Connection "upgrade";
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_read_timeout 86400s;
+    proxy_send_timeout 86400s;
+    proxy_buffering    off;
+
+    # The openmediavault web server sets a strict Content-Security-Policy at the
+    # server level that does not allow the CDN-hosted xterm.js / socket.io assets
+    # this terminal needs. Because this location declares its own add_header
+    # directives, nginx no longer inherits the server-level headers here. We strip
+    # the application's own copies first so each header is emitted exactly once.
+    proxy_hide_header Content-Security-Policy;
+    proxy_hide_header X-Frame-Options;
+    proxy_hide_header X-Content-Type-Options;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://cdnjs.cloudflare.com; connect-src 'self' ws: wss:; img-src 'self' data:; frame-ancestors 'none';" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+}

@@ -21,6 +21,10 @@
           "type": "boolean",
           "required": true
         },
+        "enablenginx": {
+          "type": "boolean",
+          "required": true
+        },
         "autosecret": {
           "type": "string",
           "minLength": 0,

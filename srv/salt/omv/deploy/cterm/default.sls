@@ -88,3 +88,37 @@ systemd_daemon_reload_cterm2:
       - file: remove_cterm_unit
 
 {% endif %}
+
+{% if config.enable | to_bool and config.enablenginx | to_bool and config.basepath %}
+
+configure_cterm_nginx:
+  file.managed:
+    - name: "/etc/nginx/openmediavault-webgui.d/openmediavault-cterm.conf"
+    - source:
+      - salt://{{ tpldir }}/files/nginx-cterm.conf.j2
+    - template: jinja
+    - context:
+        config: {{ config | json }}
+    - user: root
+    - group: root
+    - mode: '0644'
+
+reload_nginx_cterm:
+  cmd.run:
+    - name: nginx -t && systemctl reload nginx
+    - onchanges:
+      - file: configure_cterm_nginx
+
+{% else %}
+
+remove_cterm_nginx:
+  file.absent:
+    - name: "/etc/nginx/openmediavault-webgui.d/openmediavault-cterm.conf"
+
+reload_nginx_cterm:
+  cmd.run:
+    - name: nginx -t && systemctl reload nginx
+    - onchanges:
+      - file: remove_cterm_nginx
+
+{% endif %}
