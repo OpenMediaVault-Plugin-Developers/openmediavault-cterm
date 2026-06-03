@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-cterm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:20+0000\n"
+"POT-Creation-Date: 2026-06-03 22:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,19 @@ msgstr ""
 msgid "Port to listen on."
 msgstr ""
 
+msgid "Reverse proxy"
+msgstr ""
+
 msgid "Select a user ..."
+msgstr ""
+
+msgid "Serve the terminal through the openmediavault web server, e.g. https://omv-host/cterm.<br/>Requires a base path to be set. The web server terminates TLS, so the backend listens on plain HTTP locally."
+msgstr ""
+
+msgid "Update components"
+msgstr ""
+
+msgid "Update terminal components"
 msgstr ""
 
 msgid "Updated cterm settings."
