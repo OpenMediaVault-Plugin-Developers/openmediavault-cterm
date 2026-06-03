@@ -14,6 +14,8 @@ case "$1" in
         remove_action
         # Remove the configuration data
         omv_config_delete "/config/services/cterm"
+        # Remove the downloaded front-end components (not owned by dpkg).
+        rm -rf /opt/omv_cterm/static/vendor
     ;;
 
     remove)

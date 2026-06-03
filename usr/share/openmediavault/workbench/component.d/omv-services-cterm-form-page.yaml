@@ -96,6 +96,21 @@ data:
         execute:
           type: url
           url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{% if enablenginx %}{{ ['://', location() | get('hostname'), proxypath, '/?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% else %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% endif %}"
+      - text: _("Update components")
+        enabledConstraint:
+          operator: "truthy"
+          arg0:
+            prop: "enable"
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Update terminal components")
+              startOnInit: true
+              autoScroll: true
+              request:
+                service: Cterm
+                method: updateComponents
       - template: submit
       - template: cancel
         execute:

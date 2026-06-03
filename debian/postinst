@@ -22,6 +22,13 @@ case "$1" in
             groupadd --system cterm
         fi
 
+        # download the front-end components (xterm.js, socket.io, fonts) so
+        # the terminal can be served without external CDNs. Best-effort: an
+        # offline install falls back to the CDN until the components are
+        # fetched via the "Update components" button.
+        echo "Downloading terminal components ..."
+        /opt/omv_cterm/fetch_vendor.py || :
+
         # restart service if running
         term="omv_cterm.service"
         if systemctl is-active --quiet "${term}"; then

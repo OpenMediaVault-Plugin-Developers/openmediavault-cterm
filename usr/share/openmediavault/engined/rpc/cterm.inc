@@ -28,6 +28,7 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("get");
         $this->registerMethod("set");
         $this->registerMethod("enumerateUsers");
+        $this->registerMethod("updateComponents");
     }
 
     public function get($params, $context)
@@ -107,6 +108,29 @@ class OMVRpcServiceCterm extends \OMV\Rpc\ServiceAbstract
         $urlSafeString = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode(random_bytes($bytesNeeded)));
 
         return substr($urlSafeString, 0, $length);
+    }
+
+    public function updateComponents($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Download the front-end components in a background process so the
+        // web interface can stream the output.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+                use ($params, $context) {
+            $cmd = new \OMV\System\Process("/opt/omv_cterm/fetch_vendor.py");
+            $cmd->setRedirect2to1();
+            $cmd->setEnv("PYTHONUNBUFFERED", "1");
+            $cmdLine = $cmd->getCommandLine();
+            $exitStatus = $this->exec($cmdLine, $output, $bgOutputFilename);
+            if (0 !== $exitStatus) {
+                $this->writeBgProcOutput($bgOutputFilename, sprintf(
+                    "\nComponent download failed (exit code %d). ".
+                    "The CDN fallback will be used until the update succeeds.\n",
+                    $exitStatus));
+            }
+            return $output;
+        });
     }
 
     public function enumerateUsers($params, $context)

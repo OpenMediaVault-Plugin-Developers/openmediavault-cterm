@@ -2,6 +2,9 @@ openmediavault-cterm (8.0.2) stable; urgency=low
 
   * Add option to reverse proxy the terminal through the openmediavault
     web server (e.g. https://omv-host/cterm)
+  * Serve xterm.js, socket.io, Font Awesome and the web fonts locally
+    instead of from external CDNs. Components are downloaded on install
+    and can be refreshed with the new "Update components" button.
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 03 Jun 2026 00:00:00 +0000
 
