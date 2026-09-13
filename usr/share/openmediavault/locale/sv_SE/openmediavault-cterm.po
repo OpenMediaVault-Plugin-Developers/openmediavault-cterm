@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-cterm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jonatan Nyberg, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-03 22:35+0000\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
+"Last-Translator: Jonatan Nyberg, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,42 +22,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Auto-login secret"
-msgstr ""
+msgstr "Hemlighet för automatisk inloggning"
 
 msgid ""
 "Auto-login secret is too short.  Must be at least 32 characters or disabled "
 "with 0 characters."
 msgstr ""
+"Hemligheten för automatisk inloggning är för kort. Den måste innehålla minst"
+" 32 tecken eller inaktiveras genom att lämnas tom."
 
 msgid "Auto-login user"
-msgstr ""
+msgstr "Användare för automatisk inloggning"
 
 msgid "Base path"
-msgstr ""
+msgstr "Grundsökväg"
 
 msgid "Base path to use. Leave blank to disable."
-msgstr ""
+msgstr "Bassökväg som ska användas. Lämna tomt för att inaktivera."
 
 msgid "CTerm"
-msgstr ""
+msgstr "CTerm"
 
 msgid "Date & Time"
-msgstr ""
+msgstr "Datum och tid"
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktivera"
 
 msgid "Enable host shell option in container list."
-msgstr ""
+msgstr "Aktivera alternativet för värdskal i containerlistan."
 
 msgid "Host"
-msgstr ""
+msgstr "Värd"
 
 msgid "Host shell"
-msgstr ""
+msgstr "Värdskal"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
 msgstr ""
+"IP-adress som tjänsten ska lyssna på. Använd 0.0.0.0 för alla IP-adresser."
 
 msgid ""
 "Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
@@ -61,50 +68,61 @@ msgid ""
 " chars.<br/>Enter 'random64' where the number 64 can be the length between "
 "32 and 64."
 msgstr ""
+"Lämna tomt för att inaktivera automatisk inloggning.<br/>Värdet bör "
+"innehålla mellan 32 och 64 tecken.<br/>Ange ”random” för att skapa en "
+"slumpmässig sträng på mellan 32 och 64 tecken.<br/>Ange ”random64”, där "
+"talet 64 kan ersättas med en längd mellan 32 och 64."
 
 msgid "Level"
-msgstr ""
+msgstr "Nivå"
 
 msgid "Message"
-msgstr ""
+msgstr "Meddelande"
 
 msgid "Module"
-msgstr ""
+msgstr "Modul"
 
 msgid "Open UI"
-msgstr ""
+msgstr "Öppna användargränssnittet"
 
 msgid ""
 "Override auto-login user for admins.<br/>Leave blank to use web interface "
 "user.<br/>Non-admins will always use web interface user."
 msgstr ""
+"Åsidosätt användaren för automatisk inloggning för "
+"administratörer.<br/>Lämna tomt för att använda webbgränssnittets "
+"användare.<br/>Icke-administratörer använder alltid webbgränssnittets "
+"användare."
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "Port to listen on."
-msgstr ""
+msgstr "Lyssningsport."
 
 msgid "Reverse proxy"
-msgstr ""
+msgstr "Omvänd proxy"
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Välj en användare…"
 
 msgid ""
 "Serve the terminal through the openmediavault web server, e.g. https://omv-"
 "host/cterm.<br/>Requires a base path to be set. The web server terminates "
 "TLS, so the backend listens on plain HTTP locally."
 msgstr ""
+"Tillhandahåll terminalen via OpenMediaVaults webbserver, t.ex. https://omv-"
+"host/cterm.<br/>En bassökväg måste anges. Webbservern avslutar TLS, så "
+"bakänden lyssnar lokalt via okrypterad HTTP."
 
 msgid "Update components"
-msgstr ""
+msgstr "Uppdatera komponenter"
 
 msgid "Update terminal components"
-msgstr ""
+msgstr "Uppdatera terminalkomponenter"
 
 msgid "Updated cterm settings."
-msgstr ""
+msgstr "CTerm-inställningarna har uppdaterats."
 
 msgid "User must be in cterm group to login."
-msgstr ""
+msgstr "Användaren måste tillhöra gruppen cterm för att kunna logga in."

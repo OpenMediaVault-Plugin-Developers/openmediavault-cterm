@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-cterm package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Gyuris Gellért <jobel@ujevangelizacio.hu>, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-03 22:35+0000\n"
 "PO-Revision-Date: 2025-06-11 11:02+0000\n"
+"Last-Translator: Gyuris Gellért <jobel@ujevangelizacio.hu>, 2026\n"
 "Language-Team: Hungarian (Hungary) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/hu_HU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,42 +22,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Auto-login secret"
-msgstr ""
+msgstr "Automatikus bejelentkezési titkos kulcs"
 
 msgid ""
 "Auto-login secret is too short.  Must be at least 32 characters or disabled "
 "with 0 characters."
 msgstr ""
+"Az automatikus bejelentkezéshez szükséges titkos kulcs túl rövid. Legalább "
+"32 karakterből kell állnia, vagy a 0 karakterrel ki kell kapcsolni."
 
 msgid "Auto-login user"
-msgstr ""
+msgstr "Automatikus bejelentkezésű felhasználó"
 
 msgid "Base path"
-msgstr ""
+msgstr "Alapútvonal"
 
 msgid "Base path to use. Leave blank to disable."
-msgstr ""
+msgstr "A használni kívánt alapútvonal. A letiltáshoz hagyja üresen."
 
 msgid "CTerm"
-msgstr ""
+msgstr "CTerm"
 
 msgid "Date & Time"
-msgstr ""
+msgstr "Dátum és idő"
 
 msgid "Enable"
-msgstr ""
+msgstr "Engedélyezés"
 
 msgid "Enable host shell option in container list."
-msgstr ""
+msgstr "A konténerlistában engedélyezze a „gazdagép parancssor” opciót."
 
 msgid "Host"
-msgstr ""
+msgstr "Gazdagép"
 
 msgid "Host shell"
-msgstr ""
+msgstr "Gazdagép parancssor"
 
 msgid "IP to listen on. Use 0.0.0.0 for all IPs."
-msgstr ""
+msgstr "A figyelendő IP-cím. Az összes IP-címre a 0.0.0.0 érték használatos."
 
 msgid ""
 "Leave blank to disable auto-login.<br/>Should be between 32 and 64 "
@@ -61,50 +67,63 @@ msgid ""
 " chars.<br/>Enter 'random64' where the number 64 can be the length between "
 "32 and 64."
 msgstr ""
+"Hagyja üresen az automatikus bejelentkezés letiltásához.<br/>A karakterek "
+"száma 32 és 64 között kell legyen.<br/>Írja be a „random” szót egy 32 és 64 "
+"karakter közötti véletlenszerű karakterlánc generálásához.<br/>Írja be a "
+"„random64” szót, ahol a 64-es szám egy 32 és 64 közötti szám lehet."
 
 msgid "Level"
-msgstr ""
+msgstr "Szint"
 
 msgid "Message"
-msgstr ""
+msgstr "Üzenet"
 
 msgid "Module"
-msgstr ""
+msgstr "Modul"
 
 msgid "Open UI"
-msgstr ""
+msgstr "Felhasználói felület megnyitása"
 
 msgid ""
 "Override auto-login user for admins.<br/>Leave blank to use web interface "
 "user.<br/>Non-admins will always use web interface user."
 msgstr ""
+"A rendszergazdák esetében felülírja az automatikus bejelentkezéshez használt"
+" felhasználót.<br/>Üresen hagyva a webes felület felhasználója kerül "
+"alkalmazásra.<br/>A nem rendszergazdák esetében mindig a webes felület "
+"felhasználója kerül alkalmazásra."
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "Port to listen on."
-msgstr ""
+msgstr "A figyelendő port."
 
 msgid "Reverse proxy"
-msgstr ""
+msgstr "0Fordított proxy"
 
 msgid "Select a user ..."
-msgstr ""
+msgstr "Válasszon ki egy felhasználót..."
 
 msgid ""
 "Serve the terminal through the openmediavault web server, e.g. https://omv-"
 "host/cterm.<br/>Requires a base path to be set. The web server terminates "
 "TLS, so the backend listens on plain HTTP locally."
 msgstr ""
+"A terminált az OpenMediaVault webszerveren keresztül kell elérhetővé tenni, "
+"pl. https://omv-host/cterm.<br/>Ehhez be kell állítani egy alapútvonalat. A "
+"webszerver lezárja a TLS-kapcsolatot, így a háttérrendszer helyileg egyszerű"
+" HTTP-n hallgatózik."
 
 msgid "Update components"
-msgstr ""
+msgstr "Komponensek frissítése"
 
 msgid "Update terminal components"
-msgstr ""
+msgstr "A terminál komponenseinek frissítése"
 
 msgid "Updated cterm settings."
-msgstr ""
+msgstr "A cterm beállítások frissítve lettek."
 
 msgid "User must be in cterm group to login."
 msgstr ""
+"A felhasználónak a cterm csoport tagjának kell lennie a bejelentkezéshez."
