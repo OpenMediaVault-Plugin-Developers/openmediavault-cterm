@@ -146,7 +146,8 @@ socketio = SocketIO(
     async_mode='threading',
     logger=logger.getEffectiveLevel() <= logging.DEBUG,
     engineio_logger=logger.getEffectiveLevel() <= logging.DEBUG,
-    socketio_path=socketio_path_url
+    socketio_path=socketio_path_url,
+    manage_session=False
 )
 
 # Active shell sessions {sid: (master_fd, child_pid)}
