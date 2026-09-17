@@ -192,6 +192,11 @@
             color: #dc2626;
         }
 
+        .container-type.firecracker {
+            background-color: rgba(124, 58, 237, 0.1);
+            color: #7c3aed;
+        }
+
         .dark-theme .container-type.docker {
             background-color: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
@@ -205,6 +210,11 @@
         .dark-theme .container-type.host {
             background-color: rgba(245, 101, 101, 0.2);
             color: #f87171;
+        }
+
+        .dark-theme .container-type.firecracker {
+            background-color: rgba(124, 58, 237, 0.2);
+            color: #a78bfa;
         }
 
         .container-type i {

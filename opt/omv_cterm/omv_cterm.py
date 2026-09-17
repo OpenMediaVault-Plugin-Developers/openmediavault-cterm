@@ -404,12 +404,55 @@ def get_lxc_containers() -> List[Dict[str, str]]:
         logger.error(f"Failed to get LXC containers: {e.stderr}")
         return []
 
+def get_microvm_containers() -> List[Dict[str, str]]:
+    """Get list of running Firecracker microVMs (openmediavault-microvm)"""
+    if not shutil.which("systemctl"):
+        return []
+
+    try:
+        result = subprocess.run(
+            ["systemctl", "list-units", "omv-microvm@*.service",
+             "--state=running", "--no-legend", "--plain"],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        names = []
+        for line in result.stdout.splitlines():
+            fields = line.split()
+            if not fields:
+                continue
+            unit = fields[0]
+            if unit.startswith("omv-microvm@") and unit.endswith(".service"):
+                names.append(unit[len("omv-microvm@"):-len(".service")])
+        return [{"name": name, "type": "firecracker"} for name in sorted(names)]
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Failed to get microVM containers: {e.stderr}")
+        return []
+
 def get_containers() -> List[Dict[str, str]]:
     """Get combined list of all available containers"""
     containers = []
     containers.extend(get_docker_containers())
     containers.extend(get_lxc_containers())
+    containers.extend(get_microvm_containers())
     return containers
+
+def is_microvm_container(container_name: str) -> bool:
+    """Check if a Firecracker microVM with this name is currently running"""
+    if not shutil.which("systemctl"):
+        return False
+    try:
+        subprocess.run(
+            ["systemctl", "is-active", "--quiet", f"omv-microvm@{container_name}.service"],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+        return True
+    except subprocess.CalledProcessError:
+        return False
 
 def is_lxc_container(container_name: str) -> bool:
     """Check if container is an LXC container"""
@@ -454,7 +497,7 @@ def after_request(response):
             "default-src 'self'; "
             "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
             "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; "
-            "font-src https://cdnjs.cloudflare.com; "
+            "font-src 'self' https://cdnjs.cloudflare.com; "
             "connect-src 'self' ws: wss:; "
             "img-src 'self' data:; "
             "frame-ancestors 'none';"
@@ -603,6 +646,13 @@ def terminal(container: str, container_type: Optional[str] = None):
             return render_template(
                 'containers.html',
                 error=get_translation('lxc_not_found', session.get('language', DEFAULT_LANGUAGE)).format(container=container),
+                containers=get_containers(),
+                host_shell=config.host_shell
+            )
+        if container_type == 'firecracker' and not is_microvm_container(container):
+            return render_template(
+                'containers.html',
+                error=get_translation('firecracker_not_found', session.get('language', DEFAULT_LANGUAGE)).format(container=container),
                 containers=get_containers(),
                 host_shell=config.host_shell
             )
@@ -760,6 +810,15 @@ def start_terminal(data: Dict[str, Any]):
                 args = ['virsh', '-c', 'lxc:///', 'console', container]
                 os.execvpe('virsh', args, env)
 
+            elif container_type == 'firecracker':
+                # Attaches to the dtach session openmediavault-microvm's
+                # omv-microvm-run wraps Firecracker in — this does not
+                # spawn or own the VM process itself, only joins its
+                # already-running serial console.
+                sock = f"/run/openmediavault-microvm/{container}/console.dtach"
+                args = ['dtach', '-a', sock]
+                os.execvpe('dtach', args, env)
+
             else:  # Docker
                 base_args = ['docker', 'exec', '-i', '-t', container]
 
@@ -801,11 +860,13 @@ def start_terminal(data: Dict[str, Any]):
                 daemon=True
             ).start()
 
-            welcome_msg = (
-                get_translation('connected_lxc', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n'
-                if container_type == 'lxc'
-                else get_translation('connected_docker', session.get('language', DEFAULT_LANGUAGE)).format(container=container) + '\r\n'
-            )
+            lang = session.get('language', DEFAULT_LANGUAGE)
+            if container_type == 'lxc':
+                welcome_msg = get_translation('connected_lxc', lang).format(container=container) + '\r\n'
+            elif container_type == 'firecracker':
+                welcome_msg = get_translation('connected_firecracker', lang).format(container=container) + '\r\n'
+            else:
+                welcome_msg = get_translation('connected_docker', lang).format(container=container) + '\r\n'
             emit('output', welcome_msg)
             logger.info(f"Started terminal session for {container} ({container_type})")
 

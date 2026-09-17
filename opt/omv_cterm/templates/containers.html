@@ -65,6 +65,8 @@
                                     <i class="fab fa-docker"></i>Docker
                                 {% elif container.type == 'lxc' %}
                                     <i class="fas fa-cube"></i>LXC
+                                {% elif container.type == 'firecracker' %}
+                                    <i class="fas fa-microchip"></i>microVM
                                 {% endif %}
                             </span>
                             <i class="fas fa-chevron-right container-arrow"></i>

@@ -1,3 +1,14 @@
+openmediavault-cterm (8.0.4) stable; urgency=low
+
+  * Add Firecracker microVM support (openmediavault-microvm integration):
+    attach to a running microVM's console via dtach, alongside the
+    existing Docker and LXC container types
+  * Fix Content-Security-Policy font-src to allow 'self', so the locally
+    self-hosted Font Awesome/Google Fonts assets (added in 8.0.2) are no
+    longer blocked by the browser
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 16 Sep 2026 17:30:00 +0000
+
 openmediavault-cterm (8.0.3) stable; urgency=low
 
   * Fix terminal input not responding by disabling flask-socketio's
