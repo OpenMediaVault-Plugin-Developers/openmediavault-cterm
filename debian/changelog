@@ -1,3 +1,14 @@
+openmediavault-cterm (8.0.5) stable; urgency=low
+
+  * Bind the backend to 127.0.0.1 when served through the reverse proxy
+  * Only switch the backend to plain HTTP when the reverse proxy location
+    is actually installed (reverse proxy enabled and base path set)
+  * Keep the web UI port and scheme in the Open UI link when using the
+    reverse proxy
+  * Add RPC integration tests
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 21 Oct 2026 16:49:21 +0000
+
 openmediavault-cterm (8.0.4) stable; urgency=low
 
   * Add Firecracker microVM support (openmediavault-microvm integration):
