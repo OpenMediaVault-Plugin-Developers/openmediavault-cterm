@@ -25,12 +25,12 @@ data:
         name: enablenginx
         label: _("Reverse proxy")
         value: false
-        hint: _("Serve the terminal through the openmediavault web server, e.g. https://omv-host/cterm.<br/>Requires a base path to be set. The web server terminates TLS, so the backend listens on plain HTTP locally.")
+        hint: _("Serve the terminal through the openmediavault web server, e.g. https://omv-host/cterm.<br/>Requires a base path to be set. The web server terminates TLS, so the backend listens on plain HTTP on 127.0.0.1 only.")
       - type: textInput
         name: host
         label: _("Host")
         value: "0.0.0.0"
-        hint: _("IP to listen on. Use 0.0.0.0 for all IPs.")
+        hint: _("IP to listen on. Use 0.0.0.0 for all IPs. Ignored when reverse proxy is enabled.")
       - type: numberInput
         name: port
         label: _("Port")
@@ -95,7 +95,7 @@ data:
             prop: "enable"
         execute:
           type: url
-          url: "/externalRedirect/{% if ssl %}https{% else %}http{% endif %}{% if enablenginx %}{{ ['://', location() | get('hostname'), proxypath, '/?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% else %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% endif %}"
+          url: "/externalRedirect/{% if enablenginx and proxypath %}{{ [location() | get('origin'), proxypath, '/?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% else %}{% if ssl %}https{% else %}http{% endif %}{{ ['://', location() | get('hostname'), ':', port, basepath, '?user=', omvuser, '&hmac=', hmac, '&ts=', ts] | join | encodeuricomponent }}{% endif %}"
       - text: _("Update components")
         enabledConstraint:
           operator: "truthy"

@@ -1,11 +1,12 @@
 {%- set ssl_cert_dir = salt['pillar.get']('default:OMV_SSL_CERTIFICATE_DIR', '/etc/ssl') -%}
 {%- set ssl_cert_prefix = salt['pillar.get']('default:OMV_SSL_CERTIFICATE_PREFIX', 'openmediavault') -%}
+{%- set proxied = config.enablenginx | to_bool and config.basepath -%}
 {{ pillar['headers']['multiline'] }}
 [server]
-host = {{ config.host }}
+host = {{ '127.0.0.1' if proxied else config.host }}
 port = {{ config.port }}
 basepath = {{ config.basepath }}
-use_https = {{ 'False' if config.enablenginx | to_bool else ('True' if webadmin.enablessl | to_bool else 'False') }}
+use_https = {{ 'False' if proxied else ('True' if webadmin.enablessl | to_bool else 'False') }}
 ssl_cert = {{ ssl_cert_dir | path_join('certs', ssl_cert_prefix ~ webadmin.sslcertificateref ~ '.crt') }}
 ssl_key = {{ ssl_cert_dir | path_join('private', ssl_cert_prefix ~ webadmin.sslcertificateref ~ '.key') }}
 host_shell = {{ 'True' if config.hostshell | to_bool else 'False' }}
