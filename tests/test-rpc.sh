@@ -435,6 +435,21 @@ else
         else
             _fail "proxy: backend answers plain HTTP on loopback" "no response"
         fi
+        # Regression: the auto-login redirect dropped the base path, sending
+        # the first click of a fresh session to the web UI root.
+        GET_OUT=$(omv-rpc -u admin "Cterm" "get" '{}' 2>/dev/null)
+        login_qs="user=$(json_get "$GET_OUT" omvuser)&hmac=$(json_get "$GET_OUT" hmac)&ts=$(json_get "$GET_OUT" ts)"
+        resp=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' --max-time 5 \
+            "http://127.0.0.1:$ORIG_PORT$TEST_BASEPATH/?$login_qs" 2>/dev/null)
+        case "$resp" in
+            "302 http://127.0.0.1:$ORIG_PORT$TEST_BASEPATH/")
+                _pass "proxy: auto-login redirect keeps the base path" ;;
+            302*)
+                _fail "proxy: auto-login redirect keeps the base path" "redirected to: ${resp#302 }" ;;
+            *)
+                _skip "proxy: auto-login redirect keeps the base path" \
+                    "auto-login not accepted for '$(json_get "$GET_OUT" omvuser)' (HTTP ${resp%% *})" ;;
+        esac
         if [ "$WEB_SSL" = "1" ]; then
             web_url="https://127.0.0.1:$(json_get "$WEBADMIN" sslport)"
         else
