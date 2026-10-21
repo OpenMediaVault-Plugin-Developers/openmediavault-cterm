@@ -328,10 +328,12 @@ def auto_login_via_hmac():
     session["username"] = user
     logger.info(f"Auto-logged in via HMAC redirect: {user}")
 
-    # Clean up auth parameters from redirect
+    # Clean up auth parameters from redirect. request.path excludes the
+    # base path the app is mounted at, so prepend script_root.
     clean_args = {k: v for k, v in request.args.items()
                 if k not in ("user", "hmac", "ts")}
-    return redirect(request.path + ("?" + urlencode(clean_args) if clean_args else ""))
+    return redirect(request.script_root + request.path +
+                    ("?" + urlencode(clean_args) if clean_args else ""))
 
 def is_user_in_group(username: str, groupname: str) -> bool:
     """Check if user is in specified group"""
