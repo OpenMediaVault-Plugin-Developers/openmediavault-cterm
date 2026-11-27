@@ -27,7 +27,7 @@ class OMVModuleCTerm extends \OMV\Engine\Module\ServiceAbstract
     final public function onModifySslCertificate($type, $path, $object)
     {
         $db = \OMV\Config\Database::getInstance();
-        $webadmin = $db->get("conf.webadmin");
+        $webadmin = $db->getAssoc("conf.webadmin");
         if (!empty($webadmin['sslcertificateref']) &&
             isset($object['uuid']) &&
             $webadmin['sslcertificateref'] === $object['uuid']) {
